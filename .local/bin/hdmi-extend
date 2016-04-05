@@ -1,0 +1,8 @@
+#!/bin/sh
+
+STATUS=$(xrandr -q)
+
+if [ -z "$( echo "$STATUS" | grep -o -E "HDMI1 disconnected")" ]
+then
+	xrandr --output HDMI1 --auto --right-of eDP1
+fi
