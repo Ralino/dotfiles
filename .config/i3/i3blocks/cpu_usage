@@ -43,7 +43,12 @@ while (<MPSTAT>) {
 close(MPSTAT);
 
 $cpu_usage eq -1 and die 'Can\'t find CPU information';
-
+if ($cpu_usage >= 10.0) {
+	$decimals = $decimals - 1;
+}
+if ($cpu_usage >= 100.0) {
+	$decimals = $decimals - 1;
+}
 # Print short_text, full_text
 printf "%.${decimals}f%%\n", $cpu_usage;
 printf "%.${decimals}f%%\n", $cpu_usage;

@@ -13,6 +13,7 @@ Packages from the official Arch Linux repo:
 - vim
 - ttf-droid
 - feh
+- sysstat
 - audacious, firefox, skype (not completely necessary, but referenced here)
 
 Packages from the AUR:

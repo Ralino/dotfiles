@@ -92,7 +92,7 @@ rx_kib=$(( $rx_rate >> 10 ))
 rx_tmp=$(echo "$rx_kib / 102" | bc)
 rx_mib=$(echo "if(($rx_tmp * 102 + 51) < $rx_kib) $rx_tmp + 1 else $rx_tmp" | bc)
 if [[ "$rx_mib" -gt  9 ]]; then
-  printf '%s.%sMb' "`echo "$rx_mib" | grep -o "^[1-9]"`" "`echo "$rx_mib" | grep -o "[1-9]$"`"
+  printf '%s.%sMb' "`echo "$rx_mib" | grep -o "^[0-9]"`" "`echo "$rx_mib" | grep -o "[0-9]$"`"
 else
   printf '0.%sMb' "$rx_mib"
 fi
@@ -105,7 +105,7 @@ tx_kib=$(( $tx_rate >> 10 ))
 tx_tmp=$(echo "$tx_kib / 102" | bc)
 tx_mib=$(echo "if(($tx_tmp * 102 + 51) < $tx_kib) $tx_tmp + 1 else $tx_tmp" | bc)
 if [[ "$tx_mib" -gt  9 ]]; then
-  printf '%s.%sMb' "`echo "$tx_mib" | grep -o "^[1-9]"`" "`echo "$tx_mib" | grep -o "[1-9]$"`"
+  printf '%s.%sMb' "`echo "$tx_mib" | grep -o "^[0-9]"`" "`echo "$tx_mib" | grep -o "[0-9]$"`"
 else
   printf '0.%sMb' "$tx_mib"
 fi

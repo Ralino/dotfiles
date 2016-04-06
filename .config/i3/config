@@ -16,7 +16,7 @@ set $mod Mod4
 font pango:Droid Sans Mono 10
 
 #Path to wallpaper
-set $wallpaper /home/thomas/.config/i3/wallpaper.png
+set $wallpaper ~/.config/i3/wallpaper.png
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

@@ -48,7 +48,11 @@ END {
 	pct=used/total*100
 
 	# full text
-	printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
+	if (pct < 10) {
+	        printf(" %.f%%\n", pct)
+        } else {
+	        printf("%.f%%\n", pct)
+        }
 
 	# short text
 	printf("%.f%%\n", pct)
