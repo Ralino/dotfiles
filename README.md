@@ -12,6 +12,7 @@ Packages from the official Arch Linux repo:
 - terminator
 - vim
 - ttf-droid
+- numix-themes
 - feh
 - sysstat
 - audacious, firefox, skype (not completely necessary, but referenced here)

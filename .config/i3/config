@@ -154,6 +154,9 @@ assign [class="Audacious"] $workspace0
 assign [class="Skype"]     $workspace8
 assign [class="Steam"]     $workspace9
 
+
+for_window [class="Steam"] floating enable
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
