@@ -156,6 +156,7 @@ assign [class="Steam"]     $workspace9
 
 
 for_window [class="Steam"] floating enable
+for_window [class="Evince"] border normal
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -226,7 +227,7 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar
 bar {
-        status_command i3blocks -c /home/thomas/.config/i3/i3blocks.conf 
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf 
         separator_symbol ""
         tray_padding 4
 	font pango:Droid Sans Mono 11
@@ -251,8 +252,8 @@ bar {
 bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec i3lock -d -e -f -i $wallpaper -t -I 5
 
 #Set screen brightness
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -5% #TODO prevent turning off
+bindsym XF86MonBrightnessUp   exec --no-startup-id                     xbacklight     +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/helper/dimbacklight.sh 10
 
 #Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/helper/volume-up.sh
@@ -271,6 +272,7 @@ bindsym XF86HomePage exec firefox #firefox
 
 #STARTUP
 exec_always   --no-startup-id feh --bg-scale $wallpaper
+exec          --no-startup-id devmon --info-on-mount #todo check
 exec          --no-startup-id xflux -l 49.0 -g 8.4
 exec          --no-startup-id compton -f
 exec          --no-startup-id xset dpms 0 0 0
