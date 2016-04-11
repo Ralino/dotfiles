@@ -12,15 +12,18 @@ then
 	else
 		xrandr --output HDMI1 --auto --output eDP1 --auto --same-as HDMI1
 	fi
-fi
-
-if [ -z "$( echo "$STATUS" | grep -o -E "VGA1 disconnected")" ]
-then
-	echo "VGA1"
-	if [  "$HORIZONTAL" -lt "1921" ]
+else
+	if [ -z "$( echo "$STATUS" | grep -o -E "VGA1 disconnected")" ]
 	then
-		xrandr --output VGA1 --auto --right-of eDP1
+		echo "VGA1"
+		if [  "$HORIZONTAL" -lt "1921" ]
+		then
+			xrandr --output VGA1 --auto --right-of eDP1
+		else
+			xrandr --output VGA1 --auto --output eDP1 --auto --same-as VGA1
+		fi
 	else
-		xrandr --output VGA1 --auto --output eDP1 --auto --same-as VGA1
+		xrandr --output eDP1 --auto --output HDMI1 --off --output VGA1 --off
 	fi
 fi
+
