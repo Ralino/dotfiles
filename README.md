@@ -14,6 +14,7 @@ Packages from the official Arch Linux repo:
 - ttf-droid
 - numix-themes
 - feh
+- unclutter
 - sysstat
 - audacious, firefox, skype (not completely necessary, but referenced here)
 
