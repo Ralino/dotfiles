@@ -110,5 +110,18 @@ set backupdir=~/.vim/tmp,.
 set undodir=~/.vim/tmp,.
 set dir=~/.vim/tmp,.
 
-"Other settings
+" Other settings
 set number
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4 expandtab
+set smarttab
+
+" For vim-latexsuite
+filetype plugin indent on
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+
+set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
