@@ -23,6 +23,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec ~/.config/i3/helper/startterminator.py
 
 # kill focused window
 bindsym $mod+q kill
@@ -149,12 +150,12 @@ workspace $workspace9 output eDP1
 workspace $workspace0 output eDP1
 
 # Assign programs to workspaces
-assign [class="Firefox"]   $workspace1
-assign [class="chromium"]  $workspace1
-assign [class="Eclipse"]   $workspace3
+#assign [class="Firefox"]   $workspace1
+#assign [class="chromium"]  $workspace1
+#assign [class="Eclipse"]   $workspace3
 assign [class="Skype"]     $workspace8
 assign [class="TeamSpeak 3"] $workspace8
-assign [class="Steam"]     $workspace9
+#assign [class="Steam"]     $workspace9
 assign [class="Audacious"] $workspace0
 
 for_window [class="Steam"] floating enable
@@ -165,12 +166,24 @@ for_window [class="Evince"] border normal
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e mode "Exit?"
+mode "Exit?" {
+	bindsym Return exit
+	bindsym Escape mode "default"
+}
+
+#Shutdown
+bindsym $mod+Shift+q mode "Shutdown?"
+mode "Shutdown?" {
+	bindsym Return exec --no-startup-id poweroff
+	bindsym Escape mode "default"
+}
 
 # Colors
-set $orange #bf3807
+# f0544c
+set $orange #bf3807 
 set $or_bri #fc5519
 set $or_drk #8c2905
 set $gr_drk #191919
@@ -271,16 +284,18 @@ bindsym XF86AudioPrev exec --no-startup-id audtool playlist-reverse
 
 #Program shortcuts
 bindsym XF86HomePage exec --no-startup-id chromium #chromium
+bindsym $mod+b       exec --no-startup-id chromium #chromium
+
 
 
 #STARTUP
 exec_always   --no-startup-id feh --bg-scale $wallpaper
-exec          --no-startup-id devmon --info-on-mount #todo check
+exec          --no-startup-id devmon --info-on-mount
 exec          --no-startup-id xflux -l 49.0 -g 8.4
 exec          --no-startup-id compton -f
 exec          --no-startup-id xset dpms 0 0 0
 exec          --no-startup-id xset s off
-exec          --no-startup-id unclutter -root
-exec          --no-startup-id skype
+#exec          --no-startup-id unclutter -root
+#exec          --no-startup-id skype
 exec --no-startup-id      ~/.config/i3/helper/toggle-clone.sh $wallpaper
 exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh

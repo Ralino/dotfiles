@@ -2,5 +2,5 @@
 
 if [ ! -z "$1" ]
 then
-	find / -name "$1" 2> /dev/null
+	find / -name "$1" -mount 2> /dev/null
 fi
