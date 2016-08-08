@@ -16,13 +16,15 @@ Packages from the official Arch Linux repo:
 - feh
 - unclutter
 - sysstat
-- audacious, firefox, skype (not completely necessary, but referenced here)
+- chromium (not completely necessary, but referenced here)
 
 Packages from the AUR:
 - i3blocks-git
 - i3-swap-git
 - xflux
 - ttf-font-awesome
+- spotify, skype (not completely necessary, but referenced here)
+
 
 Other:
 - colorscheme [candy](http://www.vim.org/scripts/script.php?script_id=282) for vim
