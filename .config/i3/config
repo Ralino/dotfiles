@@ -98,7 +98,8 @@ set $workspace6 "6: Misc "
 set $workspace7 "7: Misc "
 set $workspace8 "8: Chat  "
 set $workspace9 "9: Steam  "
-set $workspace0 "10: Audacious  "
+set $workspace0 "10: Music  "
+set $presentation "Beamer"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -111,6 +112,7 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
+bindsym $mod+ü workspace $presentation
 
 # move focused container to workspace and switch
 bindsym $mod+Shift+1 move container to workspace $workspace1; workspace $workspace1
@@ -123,6 +125,7 @@ bindsym $mod+Shift+7 move container to workspace $workspace7; workspace $workspa
 bindsym $mod+Shift+8 move container to workspace $workspace8; workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9; workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace0; workspace $workspace0
+bindsym $mod+Shift+ü move container to workspace $presentation; workspace $presentation
 
 # move focused container to workspace and do not switch
 bindsym $mod+Control+1 move container to workspace $workspace1
@@ -135,6 +138,7 @@ bindsym $mod+Control+7 move container to workspace $workspace7
 bindsym $mod+Control+8 move container to workspace $workspace8
 bindsym $mod+Control+9 move container to workspace $workspace9
 bindsym $mod+Control+0 move container to workspace $workspace0
+bindsym $mod+Control+ü move container to workspace $presentation
 
 # Assign workspaces to screens
 workspace $workspace1 output HDMI1
@@ -149,6 +153,8 @@ workspace $workspace8 output eDP1
 workspace $workspace9 output eDP1
 workspace $workspace0 output eDP1
 
+workspace $presentation output VGA1
+
 # Assign programs to workspaces
 #assign [class="Firefox"]   $workspace1
 #assign [class="chromium"]  $workspace1
@@ -157,6 +163,7 @@ assign [class="Skype"]     $workspace8
 assign [class="TeamSpeak 3"] $workspace8
 #assign [class="Steam"]     $workspace9
 assign [class="Audacious"] $workspace0
+assign [class="Spotify"] $workspace0
 
 for_window [class="Steam"] floating enable
 for_window [class="Skype"] floating enable
@@ -175,10 +182,18 @@ mode "Exit?" {
 }
 
 #Shutdown
-bindsym $mod+Shift+q mode "Shutdown?"
+#bindsym $mod+Shift+q mode "Shutdown?"
 mode "Shutdown?" {
 	bindsym Return exec --no-startup-id poweroff
 	bindsym Escape mode "default"
+}
+
+#Suspend to RAM
+#Set to shutdown key due to bootup problems
+bindsym $mod+Shift+q mode "Suspend?" 
+mode "Suspend?" {
+	bindsym Return exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper, exec --no-startup-id systemctl suspend
+	bindsym Escape mode "default", exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
 }
 
 # Colors
@@ -187,7 +202,6 @@ set $orange #bf3807
 set $or_bri #fc5519
 set $or_drk #8c2905
 set $gr_drk #191919
-set $gr_drk_nohash 191919 #For i3lock
 set $gr_med #333333
 set $gr_bri #888888
 set $re_drk #bf0505
@@ -253,7 +267,7 @@ bar {
         	statusline #888888
         	separator $orange
 		
-		#class             border  backgrd text
+		    #class             border  backgrd text
         	focused_workspace  $orange $orange #ffffff
         	active_workspace   $gr_med $gr_med #ffffff
         	inactive_workspace $gr_drk $gr_drk #888888
@@ -265,7 +279,7 @@ bar {
 #KEY-BINDINGS
 
 #Lock
-bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec i3lock -d -e -f -i $wallpaper -t -I 5
+bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper
 
 #Set screen brightness
 bindsym XF86MonBrightnessUp   exec --no-startup-id                     xbacklight     +10%
@@ -278,9 +292,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/helper/volume-dow
 bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3/helper/volume-mute.sh
 
 #Audacious control
-bindsym XF86AudioPlay exec --no-startup-id audtool playback-playpause 
-bindsym XF86AudioNext exec --no-startup-id audtool playlist-advance
-bindsym XF86AudioPrev exec --no-startup-id audtool playlist-reverse
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause 
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 #Program shortcuts
 bindsym XF86HomePage exec --no-startup-id chromium #chromium
@@ -299,3 +313,7 @@ exec          --no-startup-id xset s off
 #exec          --no-startup-id skype
 exec --no-startup-id      ~/.config/i3/helper/toggle-clone.sh $wallpaper
 exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
+
+exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace2 --command terminator
+exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
+exec --no-startup-id alternating_layouts.py
