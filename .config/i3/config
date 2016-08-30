@@ -82,8 +82,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+#bindsym $mod+o exec --no-startup-id ~/.config/i3/helper/toggle-compton.sh #TODO
+
 # Multiscreen
-bindsym $mod+o exec --no-startup-id i3-swap
 bindsym $mod+p exec --no-startup-id ~/.config/i3/helper/toggle-clone.sh $wallpaper
 # focus the child container
 #bindsym $mod+d focus child
@@ -260,7 +261,7 @@ bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf 
         separator_symbol ""
         tray_padding 4
-	font pango:Droid Sans Mono 11
+	font pango:Droid Sans Mono, FontAwesome 11
 
 	colors {
         	background $gr_drk
