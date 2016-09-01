@@ -183,7 +183,7 @@ mode "Exit?" {
 }
 
 #Shutdown
-#bindsym $mod+Shift+q mode "Shutdown?"
+bindsym $mod+Shift+q mode "Shutdown?"
 mode "Shutdown?" {
 	bindsym Return exec --no-startup-id poweroff
 	bindsym Escape mode "default"
@@ -191,7 +191,7 @@ mode "Shutdown?" {
 
 #Suspend to RAM
 #Set to shutdown key due to bootup problems
-bindsym $mod+Shift+q mode "Suspend?" 
+bindsym $mod+Shift+s mode "Suspend?" 
 mode "Suspend?" {
 	bindsym Return exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper, exec --no-startup-id systemctl suspend
 	bindsym Escape mode "default", exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
