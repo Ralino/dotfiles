@@ -16,6 +16,7 @@ Packages from the official Arch Linux repo:
 - feh
 - unclutter
 - sysstat
+- xdotool
 - chromium (not completely necessary, but referenced here)
 
 Packages from the AUR:

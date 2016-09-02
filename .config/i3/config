@@ -26,7 +26,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec ~/.config/i3/helper/startterminator.py
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+q exec --no-startup-id ~/.config/i3/helper/kill_window.py
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
@@ -190,7 +190,6 @@ mode "Shutdown?" {
 }
 
 #Suspend to RAM
-#Set to shutdown key due to bootup problems
 bindsym $mod+Shift+s mode "Suspend?" 
 mode "Suspend?" {
 	bindsym Return exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper, exec --no-startup-id systemctl suspend
@@ -292,7 +291,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/helper/volume-up.
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/helper/volume-down.sh
 bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3/helper/volume-mute.sh
 
-#Audacious control
+#Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause 
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -301,6 +300,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86HomePage exec --no-startup-id chromium #chromium
 bindsym $mod+b       exec --no-startup-id chromium #chromium
 
+bindsym control+mod1+k exec --no-startup-id xdotool search --maxdepth 2 --class keepassx2 windowmap
 
 
 #STARTUP
@@ -318,3 +318,6 @@ exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
 exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace2 --command terminator
 exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 exec --no-startup-id alternating_layouts.py
+
+exec --no-startup-id keepassx2
+exec --no-startup-id xdotool search --maxdepth 2 --class keepassx2 windowunmap #hide keepassx2
