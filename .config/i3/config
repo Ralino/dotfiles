@@ -23,8 +23,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec ~/.config/i3/helper/startterminator.py
-
+bindsym $mod+Shift+Return exec terminator --working-directory="$(xcwd)"
 # kill focused window
 bindsym $mod+q exec --no-startup-id ~/.config/i3/helper/kill_window.py
 
@@ -319,5 +318,5 @@ exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspac
 exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 exec --no-startup-id alternating_layouts.py
 
-exec --no-startup-id keepassx2
-exec --no-startup-id xdotool search --maxdepth 2 --class keepassx2 windowunmap #hide keepassx2
+#exec --no-startup-id keepassx2
+#exec --no-startup-id xdotool search --maxdepth 2 --class keepassx2 windowunmap #hide keepassx2

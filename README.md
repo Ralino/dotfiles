@@ -29,3 +29,4 @@ Packages from the AUR:
 
 Other:
 - colorscheme [candy](http://www.vim.org/scripts/script.php?script_id=282) for vim
+- [xcwd](https://github.com/schischi/xcwd)
