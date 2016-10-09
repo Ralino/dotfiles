@@ -24,9 +24,10 @@ Packages from the AUR:
 - i3-swap-git
 - xflux
 - ttf-font-awesome
+- vim-youcompleteme-git
 - spotify, skype (not completely necessary, but referenced here)
 
 
 Other:
-- colorscheme [candy](http://www.vim.org/scripts/script.php?script_id=282) for vim
+- colorscheme [wombat256i](https://github.com/dsolstad/vim-wombat256i) for vim
 - [xcwd](https://github.com/schischi/xcwd)

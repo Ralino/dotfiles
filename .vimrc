@@ -1,23 +1,26 @@
 
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2015 Mar 24
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
 set nocompatible
+
+
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+" INSTALL VUNDLE PLUGINS HERE
+
+Plugin 'octol/vim-cpp-enhanced-highlight' " FIXME
+
+call vundle#end()
+filetype plugin indent on
+
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -49,10 +52,10 @@ if has('mouse')
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
+" Also switch off highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
-  set hlsearch
+  set nohlsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -87,6 +90,7 @@ else
 
 endif " has("autocmd")
 
+
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -103,7 +107,7 @@ if has('langmap') && exists('+langnoremap')
 endif
 
 " Set colorscheme
-colorscheme candy
+colorscheme wombat256i
 
 " Set directory for swapfiles, undo and backups to make cleaning easier
 set backupdir=~/.vim/tmp,.
@@ -124,4 +128,16 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 
 set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
+" YouCompleteMe settings
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_enable_diagnostic_highlighting = 0
+
+imap <C-e> <Esc>
+
+noremap ö l
+noremap l k
+noremap k j
+noremap j h
+
 

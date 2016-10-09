@@ -22,7 +22,7 @@ set $wallpaper ~/.config/i3/wallpaper.png
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminator
 bindsym $mod+Shift+Return exec terminator --working-directory="$(xcwd)"
 # kill focused window
 bindsym $mod+q exec --no-startup-id ~/.config/i3/helper/kill_window.py
