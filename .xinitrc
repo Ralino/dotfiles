@@ -57,7 +57,8 @@ fi
 numlockx &
 synclient TapButton1=1
 
-xmodmap -e "keycode 91 mod2 = KP_Delete period"
+setxkbmap -option caps:escape &
+#xmodmap -e "keycode 91 mod2 = KP_Delete period"
 
 #i3
 exec i3
