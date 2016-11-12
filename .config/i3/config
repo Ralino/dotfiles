@@ -22,8 +22,8 @@ set $wallpaper ~/.config/i3/wallpaper.png
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
-bindsym $mod+Shift+Return exec terminator --working-directory="$(xcwd)"
+bindsym $mod+Return exec terminator --working-directory="$(xcwd)"
+bindsym $mod+Shift+Return exec terminator
 # kill focused window
 bindsym $mod+q exec --no-startup-id ~/.config/i3/helper/kill_window.py
 
@@ -35,10 +35,10 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -47,10 +47,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -59,7 +59,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+g split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -112,7 +112,7 @@ bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
-bindsym $mod+ü workspace $presentation
+bindsym $mod+udiaerisis workspace $presentation
 
 # move focused container to workspace and switch
 bindsym $mod+Shift+1 move container to workspace $workspace1; workspace $workspace1
@@ -125,7 +125,7 @@ bindsym $mod+Shift+7 move container to workspace $workspace7; workspace $workspa
 bindsym $mod+Shift+8 move container to workspace $workspace8; workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9; workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace0; workspace $workspace0
-bindsym $mod+Shift+ü move container to workspace $presentation; workspace $presentation
+bindsym $mod+Shift+udiaerisis move container to workspace $presentation; workspace $presentation
 
 # move focused container to workspace and do not switch
 bindsym $mod+Control+1 move container to workspace $workspace1
@@ -138,7 +138,7 @@ bindsym $mod+Control+7 move container to workspace $workspace7
 bindsym $mod+Control+8 move container to workspace $workspace8
 bindsym $mod+Control+9 move container to workspace $workspace9
 bindsym $mod+Control+0 move container to workspace $workspace0
-bindsym $mod+Control+ü move container to workspace $presentation
+bindsym $mod+Control+udiaerisis move container to workspace $presentation
 
 # Assign workspaces to screens
 workspace $workspace1 output HDMI1
@@ -188,11 +188,11 @@ mode "Shutdown?" {
 	bindsym Escape mode "default"
 }
 
-#Suspend to RAM
+#Suspend to RAM TODO make automatic
 bindsym $mod+Shift+s mode "Suspend?" 
 mode "Suspend?" {
 	bindsym Return exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper, exec --no-startup-id systemctl suspend
-	bindsym Escape mode "default", exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
+	bindsym Escape mode "default", restart
 }
 
 # Colors
@@ -241,10 +241,10 @@ mode "resize" {
 # Pressing right will grow the window’s width.
 # Pressing up will grow the window’s height.
 # Pressing down will shrink the window’s height.
-bindsym $mod+Control+j resize shrink width 10 px or 10 ppt
-bindsym $mod+Control+l resize grow height 10 px or 10 ppt
-bindsym $mod+Control+k resize shrink height 10 px or 10 ppt
-bindsym $mod+Control+odiaeresis resize grow width 10 px or 10 ppt
+bindsym $mod+Control+h resize shrink width 10 px or 10 ppt
+bindsym $mod+Control+k resize grow height 10 px or 10 ppt
+bindsym $mod+Control+j resize shrink height 10 px or 10 ppt
+bindsym $mod+Control+l resize grow width 10 px or 10 ppt
 
 # same bindings, but for the arrow keys
 bindsym $mod+Control+Left  resize shrink width 10 px or 10 ppt
@@ -299,11 +299,17 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86HomePage exec --no-startup-id chromium #chromium
 bindsym $mod+b       exec --no-startup-id chromium #chromium
 
+#TODO Allow startup and auto open database
 bindsym control+mod1+k exec --no-startup-id xdotool search --maxdepth 2 --class keepassx2 windowmap
 
 
 #STARTUP
 exec_always   --no-startup-id feh --bg-scale $wallpaper
+#exec_always   --no-startup-id setxkbmap -option caps:escape
+#exec_always   --no-startup-id sleep 10; exec_always --no-startup-id xmodmap -e "keycode 91 mod2 = KP_Delete period"
+exec_always   --no-startup-id ~/.config/i3/helper/key_mapping.sh
+exec_always   --no-startup-id      ~/.config/i3/helper/toggle-clone.sh $wallpaper
+exec_always   --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
 exec          --no-startup-id devmon --info-on-mount
 exec          --no-startup-id xflux -l 49.0 -g 8.4
 exec          --no-startup-id compton -f
@@ -311,13 +317,10 @@ exec          --no-startup-id xset dpms 0 0 0
 exec          --no-startup-id xset s off
 #exec          --no-startup-id unclutter -root
 #exec          --no-startup-id skype
-exec --no-startup-id      ~/.config/i3/helper/toggle-clone.sh $wallpaper
-exec --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
 
 exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace2 --command terminator
 exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 exec --no-startup-id alternating_layouts_fixed.py
 
-exec --no-startup-id xmodmap -e "keycode 91 mod2 = KP_Delete period"
 #exec --no-startup-id keepassx2
 #exec --no-startup-id xdotool search --maxdepth 2 --class keepassx2 windowunmap #hide keepassx2

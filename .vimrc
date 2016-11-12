@@ -8,17 +8,17 @@ endif
 set nocompatible
 
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
 
 " INSTALL VUNDLE PLUGINS HERE
 
-Plugin 'octol/vim-cpp-enhanced-highlight' " FIXME
+"Plugin 'octol/vim-cpp-enhanced-highlight' " FIXME
 
-call vundle#end()
+"call vundle#end()
 filetype plugin indent on
 
 
@@ -131,13 +131,10 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 
 " YouCompleteMe settings
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+nnoremap <F6> :YcmCompleter GoTo<CR>
 
 imap <C-e> <Esc>
-
-noremap ö l
-noremap l k
-noremap k j
-noremap j h
-
-
