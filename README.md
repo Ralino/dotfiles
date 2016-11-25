@@ -20,6 +20,7 @@ Packages from the official Arch Linux repo:
 - sysstat
 - xdotool
 - rofi
+- scrot
 
 Packages from the AUR:
 - i3blocks-git
