@@ -9,15 +9,17 @@ Packages from the official Arch Linux repo:
 - i3-wm
 - compton
 - i3lock
-- terminator
+- rxvt-unicode
 - vim
+- vimpager
 - ttf-droid
+- ttf-dejavu
 - numix-themes
 - feh
 - unclutter
 - sysstat
 - xdotool
-- chromium (not completely necessary, but referenced here)
+- rofi
 
 Packages from the AUR:
 - i3blocks-git
@@ -25,9 +27,9 @@ Packages from the AUR:
 - xflux
 - ttf-font-awesome
 - vim-youcompleteme-git
-- spotify, skype (not completely necessary, but referenced here)
 
 
 Other:
 - colorscheme [wombat256i](https://github.com/dsolstad/vim-wombat256i) for vim
 - [xcwd](https://github.com/schischi/xcwd)
+- [i3ipc-python](https://github.com/acrisci/i3ipc-python)

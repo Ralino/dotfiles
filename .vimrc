@@ -137,4 +137,8 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmCompleter GoTo<CR>
 
-imap <C-e> <Esc>
+if exists('vimpager')
+    set nonumber
+    set hlsearch
+    set noloadplugins
+endif
