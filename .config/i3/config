@@ -275,8 +275,6 @@ bindsym $mod+b       exec --no-startup-id chromium #chromium
 
 #STARTUP
 
-exec_always --no-startup-id setxkbmap -option caps:escape -option kpdl:dot
-exec_always --no-startup-id ~/.config/i3/helper/key_mapping.sh
 exec_always --no-startup-id ~/.config/i3/helper/toggle-clone.sh $wallpaper2 $wallpaper
 exec_always --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
 exec        --no-startup-id devmon --info-on-mount
