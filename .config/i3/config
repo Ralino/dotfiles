@@ -12,9 +12,7 @@ set $mod Mod4
 #font pango:monospace 8
 font pango:Droid Sans Mono 10
 
-#Path to wallpaper
-set $wallpaper ~/.config/i3/fox.png
-set $wallpaper2 ~/.config/i3/fox_red.png
+#Path to helper scripts
 set $helper ~/.config/i3/helper
 
 # kill focused window
@@ -78,7 +76,7 @@ bindsym $mod+space focus mode_toggle
 floating_modifier $mod
 
 # Multiscreen
-bindsym $mod+p exec --no-startup-id ~/.config/i3/helper/toggle-clone.sh $wallpaper2 $wallpaper
+bindsym $mod+p exec --no-startup-id $helper/toggle-clone.sh
 
 # workspace names
 set $workspace1 "1: Browser  "
@@ -180,12 +178,12 @@ mode "Shutdown?" {
 #Suspend to RAM TODO make automatic
 bindsym $mod+Shift+s mode "Suspend?" 
 mode "Suspend?" {
-	bindsym Return exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper, exec --no-startup-id systemctl suspend
+	bindsym Return exec $helper/i3lockdpms.sh $($helper/pick-wallpaper.sh), exec --no-startup-id systemctl suspend
 	bindsym Escape mode "default", restart
 }
 
 #Lock
-bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec ~/.config/i3/helper/i3lockdpms.sh $wallpaper
+bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec $helper/i3lockdpms.sh $($helper/pick-wallpaper.sh)
 
 # Colors
 # f0544c
@@ -245,12 +243,12 @@ bar {
 
 #Set screen brightness
 bindsym XF86MonBrightnessUp   exec --no-startup-id                     xbacklight     +10%
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/helper/dimbacklight.sh 10
+bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh 10
 
 #Audio control
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/helper/volume-up.sh
+bindsym XF86AudioRaiseVolume exec --no-startup-id $helper/volume-up.sh
 
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/helper/volume-down.sh
+bindsym XF86AudioLowerVolume exec --no-startup-id $helper/volume-down.sh
 bindsym XF86AudioMute        exec --no-startup-id $helper/volume-mute.sh
 
 #Musicplayer control
@@ -279,10 +277,10 @@ bindsym $mod+b       exec --no-startup-id chromium #chromium
 
 #STARTUP
 
-exec_always --no-startup-id ~/.config/i3/helper/toggle-clone.sh
-exec_always --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
-exec_always --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
-exec_always --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
+exec_always --no-startup-id $helper/toggle-clone.sh
+exec_always --no-startup-id sudo $helper/apstarter.sh
+exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
+exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 exec        --no-startup-id devmon --info-on-mount
 exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
@@ -291,6 +289,6 @@ exec        --no-startup-id xset s off
 
 
 #Initialize scratchpad FIXME
-#exec --no-startup-id "i3-msg \"append_layout ~/.config/i3/helper/s_pad_layout\";\
+#exec --no-startup-id "i3-msg \"append_layout $helper/s_pad_layout\";\
 #                     [con_mark=\"scratchparent\"] move scratchpad;\
 #                     i3-msg \"exec i3-sensible-terminal\""
