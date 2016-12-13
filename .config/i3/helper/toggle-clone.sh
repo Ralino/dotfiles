@@ -6,14 +6,7 @@ HORIZONTAL=$( xrandr -q  | grep -o -E "current [0-9]{4} x [0-9]{3}" | cut -b 9-1
 
 if [ "$HORIZONTAL" -lt "1921" ]
 then
-    RAND=$RANDOM
-    let "RAND >>= 14"
-    if [ "$RAND" -eq 1 ]
-    then
-        feh --bg-scale "$1"
-    else
-        feh --bg-scale "$2"
-    fi
+    feh --bg-scale $(~/.config/i3/helper/pick-wallpaper.sh 1)
 else
-    feh --bg-scale "$1" "$2"
+    feh --bg-scale $(~/.config/i3/helper/pick-wallpaper.sh 2)
 fi

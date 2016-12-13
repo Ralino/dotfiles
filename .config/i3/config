@@ -15,6 +15,7 @@ font pango:Droid Sans Mono 10
 #Path to wallpaper
 set $wallpaper ~/.config/i3/fox.png
 set $wallpaper2 ~/.config/i3/fox_red.png
+set $helper ~/.config/i3/helper
 
 # kill focused window
 bindsym $mod+q kill
@@ -59,6 +60,9 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+
+# change container layout for children
+#bindsym $mod+Shift+w split v, layout tabbed FIXME
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -145,15 +149,15 @@ workspace $workspace0 output eDP1
 
 # Assign programs to workspaces
 #assign [class="chromium"]  $workspace1
-assign [class="Skype"]     $workspace8
+assign [class="Skype"]       $workspace8
+assign [title="Signal"]      $workspace8
 assign [class="TeamSpeak 3"] $workspace8
 #assign [class="Steam"]     $workspace9
 assign [class="Spotify"] $workspace0
 
 for_window [class="Steam"] floating enable
-for_window [class="Skype"] floating enable
+#for_window [class="Skype"] floating enable
 for_window [class="FLTK"] floating enable
-#for_window [class="Evince"] border normal
 
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -247,7 +251,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/helper/dimbackli
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/helper/volume-up.sh
 
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/helper/volume-down.sh
-bindsym XF86AudioMute        exec --no-startup-id ~/.config/i3/helper/volume-mute.sh
+bindsym XF86AudioMute        exec --no-startup-id $helper/volume-mute.sh
 
 #Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause 
@@ -275,16 +279,16 @@ bindsym $mod+b       exec --no-startup-id chromium #chromium
 
 #STARTUP
 
-exec_always --no-startup-id ~/.config/i3/helper/toggle-clone.sh $wallpaper2 $wallpaper
+exec_always --no-startup-id ~/.config/i3/helper/toggle-clone.sh
 exec_always --no-startup-id sudo ~/.config/i3/helper/apstarter.sh
+exec_always --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
+exec_always --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 exec        --no-startup-id devmon --info-on-mount
 exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off
 
-exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
-exec --no-startup-id ~/.config/i3/helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 
 #Initialize scratchpad FIXME
 #exec --no-startup-id "i3-msg \"append_layout ~/.config/i3/helper/s_pad_layout\";\
