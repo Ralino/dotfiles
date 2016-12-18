@@ -16,21 +16,25 @@ Packages from the official Arch Linux repo:
 - ttf-dejavu
 - numix-themes
 - feh
-- unclutter
 - sysstat
 - xdotool
 - rofi
 - scrot
+- fzf
+- tmux
 
 Packages from the AUR:
 - i3blocks-git
 - i3-swap-git
 - xflux
 - ttf-font-awesome
+- ttf-droid-sans-mono-dotted-powerline-git
 - vim-youcompleteme-git
+- vim-fzf
+- vim-airline
+- i3ipc-python-git
 
 
 Other:
 - colorscheme [wombat256i](https://github.com/dsolstad/vim-wombat256i) for vim
 - [xcwd](https://github.com/schischi/xcwd)
-- [i3ipc-python](https://github.com/acrisci/i3ipc-python)

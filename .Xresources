@@ -3,7 +3,7 @@
 !urxvt settings
 !
 !
-URxvt.font: xft:Droid Sans Mono:pixelsize=15,xft:Dejavu Sans Mono
+URxvt.font: xft:Droid Sans Mono Dotted for Powerline:pixelsize=15,xft:Dejavu Sans Mono
 URxvt.letterSpace: -1
 
 !Transparency

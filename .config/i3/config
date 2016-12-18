@@ -19,8 +19,7 @@ set $helper ~/.config/i3/helper
 bindsym $mod+q kill
 
 #Scratchpad
-bindsym $mod+c scratchpad show
-bindsym $mod+Shift+c move scratchpad
+bindsym $mod+c exec --no-startup-id $helper/open_scratchpad.py
 
 # change focus
 bindsym $mod+h focus left
@@ -47,7 +46,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+g split h
+bindsym $mod+s split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -64,7 +63,7 @@ bindsym $mod+e layout toggle split
 
 # focus the parent container
 bindsym $mod+a focus parent
-bindsym $mod+s focus child
+bindsym $mod+Shift+a focus child
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -80,7 +79,7 @@ bindsym $mod+p exec --no-startup-id $helper/toggle-clone.sh
 
 # workspace names
 set $workspace1 "1: Browser  "
-set $workspace2 "2: Terminal  " 
+set $workspace2 "2: Terminal  "
 set $workspace3 "3: Editor  "
 set $workspace4 "4: Misc "
 set $workspace5 "5: Misc "
@@ -103,6 +102,9 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
 #bindsym $mod+ü workspace $presentation #FIXME
+
+bindsym $mod+Tab workspace next_on_output
+bindsym $mod+Shift+Tab workspace prev_on_output
 
 # move focused container to workspace and switch
 bindsym $mod+Shift+1 move container to workspace $workspace1; workspace $workspace1
@@ -164,22 +166,22 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e mode "Exit?"
 mode "Exit?" {
-	bindsym Return exit
-	bindsym Escape mode "default"
+    bindsym Return exit
+    bindsym Escape mode "default"
 }
 
 #Shutdown
 bindsym $mod+Shift+q mode "Shutdown?"
 mode "Shutdown?" {
-	bindsym Return exec --no-startup-id poweroff
-	bindsym Escape mode "default"
+    bindsym Return exec --no-startup-id poweroff
+    bindsym Escape mode "default"
 }
 
 #Suspend to RAM TODO make automatic
-bindsym $mod+Shift+s mode "Suspend?" 
+bindsym $mod+Shift+s mode "Suspend?"
 mode "Suspend?" {
-	bindsym Return exec $helper/i3lockdpms.sh $($helper/pick-wallpaper.sh), exec --no-startup-id systemctl suspend
-	bindsym Escape mode "default", restart
+    bindsym Return exec i3lock -n -e -f -i $($helper/pick-wallpaper.sh) -t, exec --no-startup-id systemctl suspend
+    bindsym Escape mode "default", restart
 }
 
 #Lock
@@ -187,7 +189,7 @@ bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec $helper/i3lockdpms.sh $(
 
 # Colors
 # f0544c
-set $orange #bf3807 
+set $orange #bf3807
 set $or_bri #fc5519
 set $or_drk #8c2905
 set $gr_drk #191919
@@ -196,11 +198,11 @@ set $gr_bri #888888
 set $re_drk #bf0505
 
 # class                 border  backgr. text    indicator   child_border
-client.focused          $or_drk $orange #f5f5f5 $orange     $orange 
+client.focused          $or_drk $orange #f5f5f5 $orange     $orange
 client.focused_inactive $gr_drk $gr_med #f5f5f5 $gr_med     $gr_med
 client.unfocused        #111111 $gr_drk $gr_bri $gr_drk     $gr_drk
 client.urgent           #5e0000 #900000 #f5f5f5 #900000     #900000
-client.placeholder      #000000 #0c0c0c #f5f5f5 #000000     #0c0c0c 
+client.placeholder      #000000 #0c0c0c #f5f5f5 #000000     #0c0c0c
 
 # resize window (you can also use the mouse for that)
 # Pressing left will shrink the window’s width.
@@ -220,29 +222,29 @@ bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 
 # Start i3bar to display a workspace bar
 bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf 
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
         separator_symbol ""
         tray_padding 4
-	font pango:Droid Sans Mono, FontAwesome 11
+    font pango:Droid Sans Mono, FontAwesome 11
 
-	colors {
-        	background $gr_drk
-        	statusline #888888
-        	separator $orange
-		
-		    #class             border  backgrd text
-        	focused_workspace  $orange $orange #f5f5f5
-        	active_workspace   $gr_med $gr_med #f5f5f5
-        	inactive_workspace $gr_drk $gr_drk #888888
-        	urgent_workspace   $gr_drk $gr_drk $or_bri
-        	binding_mode       $gr_drk $orange #f5f5f5
-    	}
+    colors {
+            background $gr_drk
+            statusline #888888
+            separator $orange
+
+            #class             border  backgrd text
+            focused_workspace  $orange $orange #f5f5f5
+            active_workspace   $gr_med $gr_med #f5f5f5
+            inactive_workspace $gr_drk $gr_drk #888888
+            urgent_workspace   $gr_drk $gr_drk $or_bri
+            binding_mode       $gr_drk $orange #f5f5f5
+        }
 }
 
 #KEY-BINDINGS
 
 #Set screen brightness
-bindsym XF86MonBrightnessUp   exec --no-startup-id                     xbacklight     +10%
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight     +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh 10
 
 #Audio control
@@ -252,13 +254,13 @@ bindsym XF86AudioLowerVolume exec --no-startup-id $helper/volume-down.sh
 bindsym XF86AudioMute        exec --no-startup-id $helper/volume-mute.sh
 
 #Musicplayer control
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause 
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 #Take screenshot
-bindsym Print exec scrot ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f' 
-bindsym Shift+Print exec scrot -u ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f' 
+bindsym Print exec scrot ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
+bindsym Shift+Print exec scrot -u ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
 
 
 #Program shortcuts
@@ -275,9 +277,10 @@ bindsym $mod+Shift+Return exec i3-sensible-terminal
 bindsym XF86HomePage exec --no-startup-id chromium #chromium
 bindsym $mod+b       exec --no-startup-id chromium #chromium
 
+
 #STARTUP
 
-exec_always --no-startup-id $helper/toggle-clone.sh
+exec_always --no-startup-id $helper/init-xrandr.sh
 exec_always --no-startup-id sudo $helper/apstarter.sh
 exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
 exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace0 --command spotify
@@ -286,9 +289,3 @@ exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off
-
-
-#Initialize scratchpad FIXME
-#exec --no-startup-id "i3-msg \"append_layout $helper/s_pad_layout\";\
-#                     [con_mark=\"scratchparent\"] move scratchpad;\
-#                     i3-msg \"exec i3-sensible-terminal\""

@@ -26,15 +26,15 @@ filetype plugin indent on
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup      " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file (restore to previous version)
-  set undofile		" keep an undo file (undo changes after closing)
+  set backup        " keep a backup file (restore to previous version)
+  set undofile      " keep an undo file (undo changes after closing)
 endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set history=50      " keep 50 lines of command line history
+set ruler       " show the cursor position all the time
+set showcmd     " display incomplete commands
+set incsearch       " do incremental searching
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -86,7 +86,7 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+  set autoindent        " always set autoindenting on
 
 endif " has("autocmd")
 
@@ -96,7 +96,7 @@ endif " has("autocmd")
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+          \ | wincmd p | diffthis
 endif
 
 if has('langmap') && exists('+langnoremap')
@@ -108,6 +108,25 @@ endif
 
 " Set colorscheme
 colorscheme wombat256i
+
+"Command to remove trailing whitespace
+if !exists(":Retrail")
+    command Retrail :%s/\s\+$//e
+endif
+
+"Map :W to :w for mistyping
+if !exists(":W")
+    command W :w
+endif
+if !exists(":Wq")
+    command Wq :wq
+endif
+if !exists(":WQ")
+    command WQ :wq
+endif
+if !exists(":Q")
+    command Q :q
+endif
 
 " Set directory for swapfiles, undo and backups to make cleaning easier
 set backupdir=~/.vim/tmp,.
@@ -136,6 +155,13 @@ let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmCompleter GoTo<CR>
+
+" Airline settings
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+set ttimeoutlen=10
+
 
 if exists('vimpager')
     set nonumber
