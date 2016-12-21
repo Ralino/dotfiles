@@ -22,6 +22,7 @@ Packages from the official Arch Linux repo:
 - scrot
 - fzf
 - tmux
+- gsimplecal
 
 Packages from the AUR:
 - i3blocks-git
