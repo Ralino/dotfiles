@@ -6,15 +6,9 @@ setup ssh-keys for Github and others
 
 add /mnt/windows to fstab without mounting it on startup
 
-check sound module for improvements
-
 unify color set
 
 fix shutdown
-
-automate suspend
-
-stop i3lock from crashing randomly
 
 Set scheduler to PREEMPT
 

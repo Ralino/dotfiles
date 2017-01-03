@@ -1,0 +1,13 @@
+[Unit]
+Description=i3lock on suspend
+After=sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=-/home/ralino/.config/i3/helper/suspend.sh
+KillMode=none
+
+[Install]
+WantedBy=sleep.target

@@ -46,10 +46,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+s split h
+bindsym $mod+v split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+s split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -159,6 +159,9 @@ for_window [class="Steam"] floating enable
 #for_window [class="Skype"] floating enable
 for_window [class="FLTK"] floating enable
 
+for_window [class="Pavucontrol"] floating enable, sticky enable, border none, \
+    resize set 760 px 536 px,  move absolute position 1006 px 518 px
+
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -177,15 +180,15 @@ mode "Shutdown?" {
     bindsym Escape mode "default"
 }
 
-#Suspend to RAM TODO make automatic
+#Suspend to RAM
 bindsym $mod+Shift+s mode "Suspend?"
 mode "Suspend?" {
-    bindsym Return exec i3lock -n -e -f -i $($helper/pick-wallpaper.sh) -t, exec --no-startup-id systemctl suspend
-    bindsym Escape mode "default", restart
+    bindsym Return mode "default", exec --no-startup-id systemctl suspend
+    bindsym Escape mode "default"
 }
 
 #Lock
-bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec $helper/i3lockdpms.sh $($helper/pick-wallpaper.sh)
+bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec --no-startup-id $helper/i3lock.sh -dpms
 
 # Colors
 # f0544c
@@ -274,14 +277,28 @@ bindsym $mod+Return exec i3-sensible-terminal -cd "$(xcwd)"
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 #Browser
-bindsym XF86HomePage exec --no-startup-id chromium #chromium
-bindsym $mod+b       exec --no-startup-id chromium #chromium
+bindsym XF86HomePage exec chromium
+bindsym $mod+b       exec chromium
+
+#Status bar
+bindsym $mod+o mode "Status bar"
+mode "Status bar" {
+    #Volume
+    bindsym v exec --no-startup-id pavucontrol, mode "default"
+    bindsym p exec --no-startup-id pavucontrol, mode "default"
+
+    #Calendar
+    bindsym d exec --no-startup-id ~/github/gsimplecal/src/gsimplecal, mode "default"
+    bindsym c exec --no-startup-id ~/github/gsimplecal/src/gsimplecal, mode "default"
+
+    bindsym Escape mode "default"
+    bindsym $mod+o mode "default"
+}
 
 
 #STARTUP
 
-exec_always --no-startup-id $helper/init-xrandr.sh
-exec_always --no-startup-id sudo $helper/apstarter.sh
+exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
 exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace0 --command spotify
 exec        --no-startup-id devmon --info-on-mount
