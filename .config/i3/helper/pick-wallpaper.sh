@@ -22,6 +22,9 @@ fi
 
 for req in `seq $requested`; do
     rand=$RANDOM
+    while (( $rand >= (32768 / $num) * $num )); do
+        rand=$RANDOM
+    done
     let "rand %= $num"
     echo -n "${fileArray[$rand]} "
     let "num--"

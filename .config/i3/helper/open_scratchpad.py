@@ -21,5 +21,5 @@ if scrpad == []:
         #TODO test timeout
     sp_window = temp[0]
     sp_window.command("move scratchpad")
-    
+
 i3.command("scratchpad show")

@@ -12,8 +12,6 @@ urxvt*background: rgba:0000/0000/0200/e400
 
 URxvt.scrollBar: False
 
-!URxvt.keysym.Control-d: builtin: FIXME
-
 !black
 *color0:  #171717
 *color8:  #737373
@@ -68,7 +66,7 @@ rofi.lines:                          5
 ! "Font to use" Set from: Default
 rofi.font:                           Droid Sans Mono 15
 ! "Color scheme for normal row" Set from: Default
-! set $orange #bf3807 
+! set $orange #bf3807
 ! set $or_bri #fc5519
 ! set $or_drk #8c2905
 ! set $gr_drk #191919
@@ -104,7 +102,7 @@ rofi.location:                       2
 ! "Run command to execute" Set from: Default
 ! rofi.run-command:                    {cmd}
 ! "Command to get extra run targets" Set from: Default
-! rofi.run-list-command:               
+! rofi.run-list-command:
 ! "Run command to execute that runs in shell" Set from: Default
 ! rofi.run-shell-command:              {terminal} -e {cmd}
 ! "Command executed on accep-entry-custom for window modus" Set from: Default
@@ -140,7 +138,7 @@ rofi.sidebar-mode:                   true
 ! "Margin between rows" Set from: Default
 ! rofi.line-margin:                    2
 ! "Pre-set filter" Set from: Default
-! rofi.filter:                         
+! rofi.filter:
 ! "Separator style (none, dash, solid)" Set from: Default
 ! rofi.separator-style:                dash
 ! "Hide scroll-bar" Set from: Default
@@ -272,14 +270,14 @@ rofi.sidebar-mode:                   true
 ! "Custom Keybinding 19" Set from: Default
 ! rofi.kb-custom-19:                   Alt+Shift+9
 ! "The display name of this browser" Set from: Default
-! rofi.display-ssh:                    
+! rofi.display-ssh:
 ! "The display name of this browser" Set from: Default
-! rofi.display-run:                    
+! rofi.display-run:
 ! "The display name of this browser" Set from: Default
-! rofi.display-drun:                   
+! rofi.display-drun:
 ! "The display name of this browser" Set from: Default
-! rofi.display-window:                 
+! rofi.display-window:
 ! "The display name of this browser" Set from: Default
-! rofi.display-windowcd:               
+! rofi.display-windowcd:
 ! "The display name of this browser" Set from: Default
-! rofi.display-combi:                  
+! rofi.display-combi:
