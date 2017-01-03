@@ -128,6 +128,15 @@ if !exists(":Q")
     command Q :q
 endif
 
+"Allow saving of files as sudo
+if !exists(":SudoW")
+    command SudoW w !sudo tee > /dev/null %
+endif
+
+" Mappings to switch buffers
+nnoremap gb :bn<CR>
+nnoremap gB :bp<CR>
+
 " Set directory for swapfiles, undo and backups to make cleaning easier
 set backupdir=~/.vim/tmp,.
 set undodir=~/.vim/tmp,.
@@ -164,7 +173,10 @@ set ttimeoutlen=10
 
 
 if exists('vimpager')
+    let g:vimpager = {}
+    let g:less = {}
     set nonumber
     set hlsearch
     set noloadplugins
+    let g:vimpager.ansiesc = 1
 endif
