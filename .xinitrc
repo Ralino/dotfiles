@@ -8,15 +8,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -24,15 +16,7 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
-
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -56,6 +40,12 @@ fi
 
 numlockx &
 synclient TapButton1=1
+
+#bell
+pactl upload-sample /usr/share/sounds/freedesktop/stereo/dialog-warning.oga x11-bell
+pactl load-module module-x11-bell sample=x11-bell display=$DISPLAY
+
+xset b 100
 
 #xmodmap -e "keycode 91 mod2 = KP_Delete period"
 
