@@ -23,6 +23,7 @@ Packages from the official Arch Linux repo:
 - fzf
 - tmux
 - gsimplecal
+- zenity
 
 Packages from the AUR:
 - i3blocks-git
