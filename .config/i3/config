@@ -152,15 +152,15 @@ workspace $workspace0 output eDP1
 assign [class="Skype"]       $workspace8
 assign [title="Signal"]      $workspace8
 assign [class="TeamSpeak 3"] $workspace8
-#assign [class="Steam"]     $workspace9
+assign [class="Steam"]     $workspace9
 assign [class="Spotify"] $workspace0
 
-for_window [class="Steam"] floating enable
+for_window [class="Steam"] floating enable, border normal
 #for_window [class="Skype"] floating enable
 for_window [class="FLTK"] floating enable
 
 for_window [class="Pavucontrol"] floating enable, sticky enable, border none, \
-    resize set 760 px 536 px,  move absolute position 1006 px 518 px
+    resize set 760 px 536 px,  move position 1006 px 518 px
 
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -247,8 +247,8 @@ bar {
 #KEY-BINDINGS
 
 #Set screen brightness
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight     +10%
-bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh 10
+bindsym XF86MonBrightnessUp   exec --no-startup-id $helper/dimbacklight.sh +10
+bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -10
 
 #Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id $helper/volume-up.sh
@@ -307,3 +307,4 @@ exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off
 exec        --no-startup-id $helper/battery-warning.sh
+exec        --no-startup-id $helper/hdd-manager.sh 'spotify' 'gimp-2.8' 'audacious' 'python -O /usr/bin/ranger' 'dropbox'

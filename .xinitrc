@@ -51,3 +51,7 @@ xset b 100
 
 #i3
 exec i3
+
+#i3 DEBUG
+#exec $HOME/github/i3/x86_64-unknown-linux-gnu/i3 --shmlog-size=26214400
+

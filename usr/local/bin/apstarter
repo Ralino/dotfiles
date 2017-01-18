@@ -11,7 +11,7 @@ fi
 
 systemctl stop  hostapd.service
 systemctl stop iptables.service
-sleep 5
+sleep 2
 
 if [ -z "$(ip link show dev enp4s0f2 | grep "state UP")" ]; then
 	nmcli r all on
