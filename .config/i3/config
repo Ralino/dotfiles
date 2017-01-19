@@ -306,5 +306,3 @@ exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off
-exec        --no-startup-id $helper/battery-warning.sh
-exec        --no-startup-id $helper/hdd-manager.sh 'spotify' 'gimp-2.8' 'audacious' 'python -O /usr/bin/ranger' 'dropbox'

@@ -5,7 +5,7 @@ echo "Calling init-xrandr.sh ..."
 $basedir/init-xrandr.sh &
 echo "Calling apstarter.sh ..."
 sudo /usr/local/bin/apstarter &
-echo "Reverting hdd-manager ..."
-pkill -SIGUSR1 "hdd-manager.sh"
-echo "Reverting battery-warning ..."
-pkill -SIGUSR1 "battery-warning.sh"
+echo "Calling hdd-manager ..."
+$basedir/hdd-manager.sh "spotify" "gimp-2.8" "audacious" "ranger" "dropbox" &
+echo "Calling battery-warning ..."
+$basedir/battery-warning.sh &

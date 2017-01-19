@@ -1,13 +1,17 @@
 #!/bin/sh
-#
-# Make this a daemon or something, so it does not poll
-
-warn_nr=0
-basedir=$(dirname "$0")
 
 revert() {
     warn_nr=0
 }
+
+if [ "$(pgrep -x "battery-warning")" != "$$" ]; then
+    echo "battery-warning already running!
+Sending revert-signal..."
+    pkill -SIGUSR1 -x "battery-warning"
+    exit 1
+fi
+
+warn_nr=0
 
 trap revert SIGUSR1
 

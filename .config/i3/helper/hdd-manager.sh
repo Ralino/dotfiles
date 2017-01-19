@@ -5,6 +5,13 @@ init_manager() {
     sudo hdd-sleep on
 }
 
+if [ "$(pgrep -x "hdd-manager.sh")" != "$$" ]; then
+    echo "hdd-manager already running!
+Sending init-signal..."
+    pkill -SIGUSR1 -x "hdd-manager.sh"
+    exit 1
+fi
+
 trap init_manager SIGUSR1
 
 init_manager
@@ -12,7 +19,7 @@ init_manager
 while [ ! ]; do
     current=""
     for process do
-        if [ $(pgrep -x "$process") ]; then
+        if [ "$(pgrep -x "$process")" ]; then
             current="true"
         fi
     done

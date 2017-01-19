@@ -4,9 +4,9 @@ After=sleep.target
 
 [Service]
 User=%I
-Type=forking
+Type=oneshot
 Environment=DISPLAY=:0
-ExecStart=-/home/ralino/.config/i3/helper/suspend.sh
+ExecStart=-/home/ralino/.config/i3/helper/i3lock.sh
 KillMode=none
 
 [Install]
