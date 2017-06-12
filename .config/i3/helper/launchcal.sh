@@ -6,7 +6,7 @@ if (( $# != 3 )); then
 fi
 
 
-URL="https://calendar.google.com/calendar/render#main_7%7Cweek-2+"
+URL="https://calendar.google.com/calendar/render#main_7%7Cmonth-3+"
 target=0
 
 let "target = ($1 - 1970) * 512 + $2 * 32 + $3"

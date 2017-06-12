@@ -10,10 +10,9 @@ if [ "$(whoami)" != "root" ]; then
 fi
 
 systemctl stop  hostapd.service
-systemctl stop iptables.service
 sleep 2
 
-if [ -z "$(ip link show dev enp4s0f2 | grep "state UP")" ]; then
+if [ -z "$(ip link show dev enp4s0f2 | grep "state UP")" ] || [ "$1" == "stop" ]; then
 	nmcli r all on
 	exit 0
 fi
@@ -28,4 +27,3 @@ sleep 1
 
 systemctl start  dnsmasq.service
 systemctl start  hostapd.service
-systemctl start iptables.service

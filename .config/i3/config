@@ -8,6 +8,9 @@
 
 set $mod Mod4
 
+#set $external_screen HDMI1
+set $external_screen VGA1
+
 # Font for window titles. Will also be used by the bar unless a different font
 #font pango:monospace 8
 font pango:Droid Sans Mono 10
@@ -34,10 +37,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 30 px
+bindsym $mod+Shift+j move down 30 px
+bindsym $mod+Shift+k move up 30 px
+bindsym $mod+Shift+l move right 30 px
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -76,6 +79,7 @@ floating_modifier $mod
 
 # Multiscreen
 bindsym $mod+p exec --no-startup-id $helper/toggle-clone.sh
+bindsym $mod+i move workspace to output right
 
 # workspace names
 set $workspace1 "1: Browser  "
@@ -88,80 +92,66 @@ set $workspace7 "7: Misc "
 set $workspace8 "8: Chat  "
 set $workspace9 "9: Steam  "
 set $workspace0 "10: Music  "
-set $presentation "Beamer"
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace0
-#bindsym $mod+ü workspace $presentation #FIXME
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 bindsym $mod+Tab workspace next_on_output
 bindsym $mod+Shift+Tab workspace prev_on_output
 
 # move focused container to workspace and switch
-bindsym $mod+Shift+1 move container to workspace $workspace1; workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2; workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3; workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4; workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5; workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6; workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7; workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8; workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9; workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace0; workspace $workspace0
-#bindsym $mod+Shift+ü move container to workspace $presentation; workspace $presentation #FIXME
+bindsym $mod+Shift+1 move container to workspace number 1;  workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2;  workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3;  workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4;  workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5;  workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6;  workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7;  workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8;  workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9;  workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10; workspace number 10
 
 # move focused container to workspace and do not switch
-bindsym $mod+Control+1 move container to workspace $workspace1
-bindsym $mod+Control+2 move container to workspace $workspace2
-bindsym $mod+Control+3 move container to workspace $workspace3
-bindsym $mod+Control+4 move container to workspace $workspace4
-bindsym $mod+Control+5 move container to workspace $workspace5
-bindsym $mod+Control+6 move container to workspace $workspace6
-bindsym $mod+Control+7 move container to workspace $workspace7
-bindsym $mod+Control+8 move container to workspace $workspace8
-bindsym $mod+Control+9 move container to workspace $workspace9
-bindsym $mod+Control+0 move container to workspace $workspace0
-#bindsym $mod+Control+ü move container to workspace $presentation #FIXME
+bindsym $mod+Control+1 move container to workspace number 1
+bindsym $mod+Control+2 move container to workspace number 2
+bindsym $mod+Control+3 move container to workspace number 3
+bindsym $mod+Control+4 move container to workspace number 4
+bindsym $mod+Control+5 move container to workspace number 5
+bindsym $mod+Control+6 move container to workspace number 6
+bindsym $mod+Control+7 move container to workspace number 7
+bindsym $mod+Control+8 move container to workspace number 8
+bindsym $mod+Control+9 move container to workspace number 9
+bindsym $mod+Control+0 move container to workspace number 10
 
 # Assign workspaces to screens
-workspace $workspace1 output HDMI1
-workspace $workspace2 output HDMI1
-workspace $workspace3 output HDMI1
-workspace $workspace4 output HDMI1
-workspace $workspace5 output HDMI1
+workspace  1 output $external_screen
+workspace  2 output $external_screen
+workspace  3 output $external_screen
+workspace  4 output $external_screen
+workspace  5 output $external_screen
 
-workspace $workspace6 output eDP1
-workspace $workspace7 output eDP1
-workspace $workspace8 output eDP1
-workspace $workspace9 output eDP1
-workspace $workspace0 output eDP1
+workspace  6  output eDP1
+workspace  7  output eDP1
+workspace  8  output eDP1
+workspace  9  output eDP1
+workspace  10 output eDP1
 
 #workspace $presentation output VGA1 #FIXME
 
 # Assign programs to workspaces
-#assign [class="chromium"]  $workspace1
-assign [class="Skype"]       $workspace8
-assign [title="Signal"]      $workspace8
-assign [class="TeamSpeak 3"] $workspace8
-assign [class="Steam"]     $workspace9
-assign [class="Spotify"] $workspace0
 
 for_window [class="Steam"] floating enable, border normal
 #for_window [class="Skype"] floating enable
 for_window [class="FLTK"] floating enable
-
-for_window [class="Pavucontrol"] floating enable, sticky enable, border none, \
-    resize set 760 px 536 px,  move position 1006 px 518 px
-
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -258,8 +248,11 @@ bindsym XF86AudioMute        exec --no-startup-id $helper/volume-mute.sh
 
 #Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym $mod+x        exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym $mod+m        exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym $mod+n        exec --no-startup-id playerctl previous
 
 #Take screenshot
 bindsym Print exec scrot ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
@@ -284,8 +277,8 @@ bindsym $mod+b       exec chromium
 bindsym $mod+o mode "Status bar"
 mode "Status bar" {
     #Volume
-    bindsym v exec --no-startup-id pavucontrol, mode "default"
-    bindsym p exec --no-startup-id pavucontrol, mode "default"
+    bindsym v exec --no-startup-id $helper/volume-control.sh, mode "default"
+    bindsym p exec --no-startup-id $helper/volume-control.sh, mode "default"
 
     #Calendar
     bindsym d exec --no-startup-id ~/github/gsimplecal/src/gsimplecal, mode "default"
@@ -299,8 +292,7 @@ mode "Status bar" {
 #STARTUP
 
 exec_always --no-startup-id $helper/init-system.sh
-exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace2 --command i3-sensible-terminal
-exec_always --no-startup-id $helper/app-on-ws-init.py --workspace $workspace0 --command spotify
+exec        --no-startup-id $helper/workspace_manager.py
 exec        --no-startup-id devmon --info-on-mount
 exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f

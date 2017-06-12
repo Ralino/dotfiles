@@ -84,12 +84,9 @@ if has("autocmd")
 
   augroup END
 
-else
-
-  set autoindent        " always set autoindenting on
-
 endif " has("autocmd")
 
+set autoindent        " ALWAYS always set autoindenting on
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -107,7 +104,11 @@ if has('langmap') && exists('+langnoremap')
 endif
 
 " Set colorscheme
-colorscheme wombat256i
+if has("gui_running")
+    colorscheme wombat256
+else
+    colorscheme wombat256i
+endif
 
 "Command to remove trailing whitespace
 if !exists(":Retrail")
@@ -145,9 +146,9 @@ set dir=~/.vim/tmp,.
 " Other settings
 set number
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4 expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2 expandtab
 set smarttab
 
 " For vim-latexsuite
@@ -158,9 +159,12 @@ let g:tex_flavor = "latex"
 set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
 " YouCompleteMe settings
+let g:ycm_server_python_interpreter = "/usr/bin/python2"
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_error_symbol = '!'
+let g:ycm_warning_symbol = '!'
 let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmCompleter GoTo<CR>
@@ -171,6 +175,15 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 set ttimeoutlen=10
 
+" Special syntax settings
+au BufNewFile,BufRead,BufEnter *.frag,*.vert,*.fp,*.glsl setf glsl
+autocmd FileType glsl set cindent
+
+au BufNewFile,BufRead,BufEnter *.launch setf xml
+
+" Haskell
+au BufEnter *.hs compiler ghc
+let g:haddock_browser = "/bin/rifle"
 
 if exists('vimpager')
     let g:vimpager = {}

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 basedir=$(dirname "$0")
+external_screen=$(cat /home/ralino/.config/i3/config | grep "^set \$external_screen" | grep -o -E "[[:alnum:]]+$")
 
 blsingle=1
 bldual=20
@@ -22,9 +23,13 @@ if (( $bldual < 1 )) || (( $bldual > 100 )); then
 fi
 
 if $basedir/dual-head.sh; then
-    xrandr --output HDMI1 --auto --primary --right-of eDP1
+    xrandr --output $external_screen --auto --primary --right-of eDP1
     xbacklight -set $bldual
     feh --bg-scale $($basedir/pick-wallpaper.sh 2)
+
+    #workaround to stop i3 from crashing
+    sleep 0.5
+    xdotool mousemove_relative 1 0
 else
     xrandr --output eDP1 --auto --primary --output HDMI1 --off --output VGA1 --off
     xbacklight -set $blsingle
