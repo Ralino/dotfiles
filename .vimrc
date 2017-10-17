@@ -7,18 +7,16 @@ endif
 
 set nocompatible
 
+set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
-"filetype off
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-"Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'junegunn/fzf.vim'
 
-" INSTALL VUNDLE PLUGINS HERE
-
-"Plugin 'octol/vim-cpp-enhanced-highlight' " FIXME
-
-"call vundle#end()
+call vundle#end()
 filetype plugin indent on
 
 
@@ -156,8 +154,6 @@ filetype plugin indent on
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 
-set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-
 " YouCompleteMe settings
 let g:ycm_server_python_interpreter = "/usr/bin/python2"
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
@@ -168,6 +164,16 @@ let g:ycm_warning_symbol = '!'
 let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmCompleter GoTo<CR>
+nnoremap <F7> :YcmCompleter FixIt<CR>
+if !exists(':Yr')
+  command Yr :YcmForceCompileAndDiagnostics
+endif
+if !exists(':Yg')
+  command Yg :YcmCompleter GoTo
+endif
+if !exists(':Yf')
+  command Yf :YcmCompleter FixIt
+endif
 
 " Airline settings
 set laststatus=2
@@ -179,11 +185,42 @@ set ttimeoutlen=10
 au BufNewFile,BufRead,BufEnter *.frag,*.vert,*.fp,*.glsl setf glsl
 autocmd FileType glsl set cindent
 
+" ROS launch files
 au BufNewFile,BufRead,BufEnter *.launch setf xml
 
 " Haskell
 au BufEnter *.hs compiler ghc
 let g:haddock_browser = "/bin/rifle"
+
+" NERDtree
+if !exists(':Nt')
+  command Nt :NERDTreeToggle
+endif
+if !exists(':Ntf')
+  command Ntf :NERDTreeFind
+endif
+
+" FZF
+if !exists(':Fb')
+  command Fb :Buffers
+endif
+if !exists(':Ff')
+  command Ff :Files
+endif
+if !exists(':Fl')
+  command Fl :BLines
+endif
+if !exists(':Fla')
+  command Fla :Lines
+endif
+
+" Easier window navigation
+nnoremap <silent> <c-l> :wincmd l<CR>
+nnoremap <silent> <c-h> :wincmd h<CR>
+nnoremap <silent> <c-k> :wincmd k<CR>
+nnoremap <silent> <c-j> :wincmd j<CR>
+
+runtime! ftplugin/man.vim
 
 if exists('vimpager')
     let g:vimpager = {}
