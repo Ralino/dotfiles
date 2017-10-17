@@ -1,0 +1,28 @@
+#!/bin/bash
+
+target_dir="src/"
+build_dir="build/"
+
+if [ ! -d $build_dir ] && [ ! -d $target_dir ]; then
+  echo "Cannot find directories '${build_dir}' and '${target_dir}'!"
+  exit 1
+fi
+
+cmakelists=$(find ${target_dir} -name "CMakeLists.txt")
+modules=$(grep -o -E 'project\( *"?[^") ]+' ${cmakelists} | grep -o -E '[^"( ]+$')
+targets=$(dirname ${cmakelists})
+
+for cmakelist in $cmakelists; do
+  module=$(grep -o -E 'project\( *"?[^") ]+' ${cmakelist} | grep -o -E '[^"( ]+$')
+  target=$(dirname ${cmakelist})
+  if [ "$module" ]; then
+    src="${build_dir}${module}/compile_commands.json"
+    if [ -f $src ]; then
+      ln -v -f -t $target $src
+    else
+      echo "Cannot find compilation database at ${build_dir}${module} (Compile with -DCMAKE_EXPORT_COMPILE_COMMANDS=ON)"
+    fi
+  else
+    echo "${target} has no associated build"
+  fi
+done
