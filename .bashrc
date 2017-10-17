@@ -39,13 +39,14 @@ ros() {
 
     alias catkin_make="catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python2 -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so"
     source /home/ralino/kamaro/catkin_ws/devel/setup.bash
-    export LIBGL_ALWAYS_SOFTWARE=1
+    #export LIBGL_ALWAYS_SOFTWARE=1
     cd /home/ralino/kamaro/catkin_ws/
     PS1="\[\e]2;\u@\h:\w - ROS\a\]${orange_bg}${black_ft}${bold_ft}ROS${prompt_base}"
     export PATH=~/kamaro/python2-dummy:$PATH
 }
 
-function btr() {
+#Connect with Beteigeuze
+btr() {
     ros
     export ROS_MASTER_URI=http://192.168.1.42:11311
     export ROS_IP=`ip a| sed -En 's/.*inet (addr:)?(192.([0-9]*\.){2}[0-9]*).*/\2/p'` # This forces ROS to identify this computer using its IP instead of the hostname which the robot cannot resolve
@@ -61,12 +62,21 @@ iboss() {
     PS1="\[\e]2;\u@\h:\w - iBOSS\a\]${orange_bg}${black_ft}${bold_ft}iBOSS${prompt_base}"
 }
 
+#ranger
+launch-ranger() {
+    local prev_prompt=$PS1
+    PS1="${prev_prompt}\[\e]2;\u@\h:\w - ranger\a\]"
+    ranger
+    PS1=$prev_prompt
+}
+#TODO update prompt
+bind -x '"\C-f": "launch-ranger"'
+
 alias cd-scheduling='cd /home/ralino/fzi_job/iboss_ws/src/iboss/iboss_scheduling_node/'
 
 alias ros-clion='ros && clion'
 alias iboss-clion='iboss && clion'
 
-export PAGER=vimpager
 export TERM=xterm-256color
 export EDITOR=vim
 export COLORTERM=urxvt
