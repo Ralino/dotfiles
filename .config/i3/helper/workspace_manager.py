@@ -15,13 +15,12 @@ def get_ws_name(con):
             return get_chromium_name(con)
         else:
             if (con.window_class == "Pavucontrol" and con.type == "floating_con"
-                    or con.window_class == "gsimplecal"):
+                    or con.window_class == "Gsimplecal"):
                 return ""
             return con.window_class
 
 def get_urxvt_name(con):
     #TODO ranger
-    #TODO update when name changes
     if con.name == "scratchpad":
         return ""
     if con.name.endswith(" - VIM"):
@@ -47,7 +46,7 @@ def get_urxvt_name(con):
             return "Terminal"
 
 def get_chromium_name(con):
-    if con.name.startswith("WhatsApp"):
+    if con.name.endswith("WhatsApp"):
         return "WhatsApp"
     elif con.name.startswith("Signal"):
         return "Signal"

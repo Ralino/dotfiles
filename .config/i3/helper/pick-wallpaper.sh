@@ -2,7 +2,7 @@
 #
 
 num=0
-files="$HOME/wallpaper/*.png"
+files="$HOME/wallpaper/fav/*.png"
 
 if [ -z $1 ]; then
     requested=1

@@ -39,7 +39,6 @@ fi
 #exec xterm -geometry 80x66+0+0 -name login
 
 numlockx &
-synclient TapButton1=1
 
 #bell
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/dialog-warning.oga x11-bell
