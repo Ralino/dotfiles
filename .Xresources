@@ -8,7 +8,7 @@ URxvt.letterSpace: -1
 
 !Transparency
 urxvt*depth: 32
-urxvt*background: rgba:0000/0000/0200/e400
+urxvt*background: rgba:0200/0200/0200/f000
 
 URxvt.scrollBar: False
 
