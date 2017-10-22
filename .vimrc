@@ -15,6 +15,9 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'majutsushi/tagbar'
+
 
 call vundle#end()
 filetype plugin indent on
@@ -101,6 +104,14 @@ if has('langmap') && exists('+langnoremap')
   set langnoremap
 endif
 
+" gui options
+if has("gui_running")
+  set guioptions-=e
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=L
+endif
+
 " Set colorscheme
 if has("gui_running")
     colorscheme wombat256
@@ -161,7 +172,8 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_error_symbol = '!'
 let g:ycm_warning_symbol = '!'
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_complete_in_comments = 1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <F6> :YcmCompleter GoTo<CR>
 nnoremap <F7> :YcmCompleter FixIt<CR>
@@ -179,7 +191,16 @@ endif
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+if has('gui_running')
+  let g:airline_theme='distinguished'
+else
+  let g:airline_theme='wombat'
+endif
 set ttimeoutlen=10
+
+"Gitgutter
+set updatetime=250
+let g:gitgutter_map_keys = 0
 
 " Special syntax settings
 au BufNewFile,BufRead,BufEnter *.frag,*.vert,*.fp,*.glsl setf glsl
@@ -212,6 +233,11 @@ if !exists(':Fl')
 endif
 if !exists(':Fla')
   command Fla :Lines
+endif
+
+" Tagbar
+if !exists(':Tb')
+  command Tb :TagbarToggle
 endif
 
 " Easier window navigation
