@@ -1,14 +1,16 @@
 #!/bin/bash
 
-target_dir="src/"
+source_dir="src/"
 build_dir="build/"
 
-if [ ! -d $build_dir ] && [ ! -d $target_dir ]; then
-  echo "Cannot find directories '${build_dir}' and '${target_dir}'!"
+if [ ! -d $build_dir ] && [ ! -d $source_dir ]; then
+  echo "Cannot find directories '${build_dir}' and '${source_dir}'!"
   exit 1
 fi
 
-cmakelists=$(find ${target_dir} -name "CMakeLists.txt")
+rm $(find ${source_dir} -name "compile_commands.json")
+
+cmakelists=$(find ${source_dir}../ -name "CMakeLists.txt")
 modules=$(grep -o -E 'project\( *"?[^") ]+' ${cmakelists} | grep -o -E '[^"( ]+$')
 targets=$(dirname ${cmakelists})
 

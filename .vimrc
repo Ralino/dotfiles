@@ -17,7 +17,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'junegunn/fzf.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
-
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 call vundle#end()
 filetype plugin indent on
@@ -186,13 +187,16 @@ endif
 if !exists(':Yf')
   command Yf :YcmCompleter FixIt
 endif
+if !exists(':Yt')
+  command Yt :YcmCompleter GetType
+endif
 
 " Airline settings
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if has('gui_running')
-  let g:airline_theme='distinguished'
+  let g:airline_theme='simple'
 else
   let g:airline_theme='wombat'
 endif
@@ -208,10 +212,6 @@ autocmd FileType glsl set cindent
 
 " ROS launch files
 au BufNewFile,BufRead,BufEnter *.launch setf xml
-
-" Haskell
-au BufEnter *.hs compiler ghc
-let g:haddock_browser = "/bin/rifle"
 
 " NERDtree
 if !exists(':Nt')

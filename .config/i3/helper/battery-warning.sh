@@ -16,7 +16,7 @@ warn_nr=0
 trap revert SIGUSR1
 
 while [ ! ]; do
-    batstatus=$(acpi -b)
+    batstatus=$(acpi -b | head -n 1)
     remaining=$(echo "$batstatus" | grep -o " [[:digit:]]*%" | grep -o "[[:digit:]]*")
 
     if [ "$(echo "$batstatus" | grep "Discharging")" ]; then

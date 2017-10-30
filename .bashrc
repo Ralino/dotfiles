@@ -77,6 +77,6 @@ alias cd-scheduling='cd /home/ralino/fzi_job/iboss_ws/src/iboss/iboss_scheduling
 alias ros-clion='ros && clion'
 alias iboss-clion='iboss && clion'
 
-export TERM=xterm-256color
+export TERM=rxvt-256color
 export EDITOR=vim
 export COLORTERM=urxvt
