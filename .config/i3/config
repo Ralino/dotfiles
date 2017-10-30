@@ -81,18 +81,6 @@ floating_modifier $mod
 bindsym $mod+p exec --no-startup-id $helper/toggle-clone.sh
 bindsym $mod+i move workspace to output right
 
-# workspace names
-set $workspace1 "1: Browser  "
-set $workspace2 "2: Terminal  "
-set $workspace3 "3: Editor  "
-set $workspace4 "4: Misc "
-set $workspace5 "5: Misc "
-set $workspace6 "6: Misc "
-set $workspace7 "7: Misc "
-set $workspace8 "8: Chat  "
-set $workspace9 "9: Steam  "
-set $workspace0 "10: Music  "
-
 # switch to workspace
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -190,10 +178,11 @@ set $gr_drk #191919
 set $gr_med #333333
 set $gr_bri #888888
 set $re_drk #bf0505
+set $bright #dfdfdf
 
 # class                 border  backgr. text    indicator   child_border
-client.focused          $or_drk $orange #f5f5f5 $orange     $orange
-client.focused_inactive $gr_drk $gr_med #f5f5f5 $gr_med     $gr_med
+client.focused          $or_drk $orange $bright $orange     $orange
+client.focused_inactive $gr_drk $gr_med $bright $gr_med     $gr_med
 client.unfocused        #111111 $gr_drk $gr_bri $gr_drk     $gr_drk
 client.urgent           #5e0000 #900000 #f5f5f5 #900000     #900000
 client.placeholder      #000000 #0c0c0c #f5f5f5 #000000     #0c0c0c
@@ -214,26 +203,6 @@ bindsym $mod+Control+Up    resize grow height 10 px or 10 ppt
 bindsym $mod+Control+Down  resize shrink height 10 px or 10 ppt
 bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 
-# Start i3bar to display a workspace bar
-bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-        separator_symbol ""
-        tray_padding 4
-    font pango:Droid Sans Mono, FontAwesome 11
-
-    colors {
-            background $gr_drk
-            statusline #888888
-            separator $orange
-
-            #class             border  backgrd text
-            focused_workspace  $orange $orange #f5f5f5
-            active_workspace   $gr_med $gr_med #f5f5f5
-            inactive_workspace $gr_drk $gr_drk #888888
-            urgent_workspace   $gr_drk $gr_drk $or_bri
-            binding_mode       $gr_drk $orange #f5f5f5
-        }
-}
 
 #KEY-BINDINGS
 
@@ -263,7 +232,7 @@ bindsym Shift+Print exec scrot -u ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gim
 #Program shortcuts
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+d exec --no-startup-id rofi-pass
 
 # start a terminal
@@ -271,8 +240,8 @@ bindsym $mod+Return exec i3-sensible-terminal -cd "$(xcwd)"
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 #Browser
-bindsym XF86HomePage exec chromium
-bindsym $mod+b       exec chromium
+bindsym XF86HomePage exec firefox-nightly
+bindsym $mod+b       exec firefox-nightly
 
 #Status bar
 bindsym $mod+o mode "Status bar"

@@ -1,0 +1,234 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+orange = #bf3807
+or_bri = #fc5519
+or_drk = #8c2905
+gr_drk = #191919
+gr_med = #333333
+gr_mbr = #444444
+gr_bri = #888888
+re_drk = #bf0505
+bright = #dfdfdf
+
+[bar/base]
+
+width = 100%
+weight = 21
+bottom = true
+fixed-center = true
+
+background = ${colors.gr_drk}
+foreground = ${colors.bright}
+
+line-size = 4
+
+padding-left = 1
+padding-right = 1
+
+module-margin = 2
+
+font-0 =xft:Droid Sans Mono Dotted for Powerline:pixelsize=10;2
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-1 = wunconsiji:pixelsize=10;1
+
+[bar/primary]
+monitor = ${env:MONITOR:HDMI-1}
+monitor-fallback = ${env:MONITOR:eDP1}
+
+modules-left = i3
+modules-center = date
+modules-right = volume memory cpu filesystem wlan eth battery
+
+tray-position = right
+tray-padding = 3
+
+inherit = bar/base
+
+[bar/secondary]
+monitor = ${env:MONITOR:eDP1}
+
+modules-left = i3
+modules-center = music
+
+inherit = bar/base
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+enable-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.bright}
+label-mode-background = ${colors.orange}
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+label-focused-background = ${colors.gr_med}
+label-focused-underline = ${colors.orange}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${colors.gr_bri}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-underline = ${colors.re_drk}
+label-urgent-padding = 2
+
+[module/volume]
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-underline = ${colors.gr_med}
+
+label-headphones = %percentage%%
+label-headphones-foreground = ${colors.bright}
+
+label-volume = %percentage%%
+label-volume-foreground = ${colors.bright}
+
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
+ramp-volume-foreground = ${colors.orange}
+
+ramp-headphones-0 = " "
+ramp-headphones-1 = " "
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.orange}
+format-muted-underline = ${colors.gr_med}
+label-muted = muted
+label-muted-foreground = ${colors.bright}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.orange}
+format-underline = ${colors.gr_med}
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.orange}
+format-underline = ${colors.gr_mbr}
+label = %percentage_used%%
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+format-mounted-prefix = " "
+format-mounted-prefix-foreground = ${colors.orange}
+format-mounted-underline = ${colors.gr_mbr}
+label-mounted = %free%
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = ${colors.gr_med}
+label-connected = %essid%
+
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = " "
+format-disconnected-prefix-foreground = ${colors.orange}
+format-disconnected-underline = ${colors.gr_med}
+label-disconnected = down
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.orange}
+
+[module/eth]
+type = internal/network
+interface = enp4s0f2
+interval = 3.0
+
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.orange}
+format-connected-underline = ${colors.gr_mbr}
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = "%d.%m.%Y"
+time = %H:%M:%S
+
+label = %date% %time%
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = ${colors.gr_med}
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.gr_med}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.orange}
+format-full-underline = ${colors.gr_med}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.orange}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.orange}
+animation-charging-framerate = 750
+
+[module/music]
+;TODO use dbus for this
+type = custom/script
+interval = 1
+label = %output%
+exec = ~/.config/polybar/scripts/mpris.sh
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
