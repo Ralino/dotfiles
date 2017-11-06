@@ -8,15 +8,30 @@
 ;=====================================================
 
 [colors]
-orange = #bf3807
-or_bri = #fc5519
-or_drk = #8c2905
-gr_drk = #191919
-gr_med = #333333
-gr_mbr = #444444
-gr_bri = #888888
-re_drk = #bf0505
-bright = #dfdfdf
+black   = #282828
+dgrey   = #928374
+dred    = #cc241d
+red     = #fb4934
+dgreen  = #98971a
+green   = #b8bb26
+dyellow = #d65d0e
+yellow  = #fe8019
+dblue   = #458588
+blue    = #83a598
+dmagenta= #b16286
+magenta = #d3869b
+dcyan   = #689d6a
+cyan    = #8ec07c
+lgrey   = #a89984
+white   = #ebdbb2
+
+bg      = #282828
+fg      = #ebdbb2
+fg0     = #fbf1c7
+fg2     = #d5c4a1
+bg2     = #504945
+dorange = #fe8019
+orange  = #d65d0e
 
 [bar/base]
 
@@ -25,8 +40,8 @@ weight = 21
 bottom = true
 fixed-center = true
 
-background = ${colors.gr_drk}
-foreground = ${colors.bright}
+background = ${colors.bg}
+foreground = ${colors.fg}
 
 line-size = 4
 
@@ -35,17 +50,17 @@ padding-right = 1
 
 module-margin = 2
 
-font-0 =xft:Droid Sans Mono Dotted for Powerline:pixelsize=10;2
+font-1 =Fira Sans:fontformat=truetype:pixelsize=10;2
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-1 = wunconsiji:pixelsize=10;1
+font-2 = wunconsiji:pixelsize=10;1
 
 [bar/primary]
-monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:HDMI1}
 monitor-fallback = ${env:MONITOR:eDP1}
 
 modules-left = i3
-modules-center = date
-modules-right = volume memory cpu filesystem wlan eth battery
+modules-center = music date
+modules-right = volume memory cpu wlan eth battery
 
 tray-position = right
 tray-padding = 3
@@ -56,7 +71,7 @@ inherit = bar/base
 monitor = ${env:MONITOR:eDP1}
 
 modules-left = i3
-modules-center = music
+modules-center = music date
 
 inherit = bar/base
 
@@ -70,13 +85,13 @@ enable-scroll = false
 pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = ${colors.bright}
-label-mode-background = ${colors.orange}
+label-mode-foreground = ${colors.fg0}
+label-mode-background = ${colors.dorange}
 
 ; focused = Active workspace on focused monitor
 label-focused = %name%
-label-focused-background = ${colors.gr_med}
-label-focused-underline = ${colors.orange}
+label-focused-background = ${colors.bg2}
+label-focused-underline = ${colors.dorange}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
@@ -86,54 +101,54 @@ label-unfocused-padding = 2
 ; visible = Active workspace on unfocused monitor
 label-visible = %name%
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${colors.gr_bri}
+label-visible-underline = ${colors.dgrey}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %name%
-label-urgent-underline = ${colors.re_drk}
+label-urgent-underline = ${colors.dred}
 label-urgent-padding = 2
 
 [module/volume]
 type = internal/volume
 
 format-volume = <ramp-volume> <label-volume>
-format-volume-underline = ${colors.gr_med}
+format-volume-underline = ${colors.lgrey}
 
 label-headphones = %percentage%%
-label-headphones-foreground = ${colors.bright}
+label-headphones-foreground = ${colors.fg}
 
 label-volume = %percentage%%
-label-volume-foreground = ${colors.bright}
+label-volume-foreground = ${self.label-headphones-foreground}
 
 ramp-volume-0 = " "
 ramp-volume-1 = " "
 ramp-volume-2 = " "
-ramp-volume-foreground = ${colors.orange}
+ramp-volume-foreground = ${colors.dorange}
 
 ramp-headphones-0 = " "
 ramp-headphones-1 = " "
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.orange}
-format-muted-underline = ${colors.gr_med}
+format-muted-foreground = ${self.ramp-volume-foreground}
+format-muted-underline = ${self.format-volume-underline}
 label-muted = muted
-label-muted-foreground = ${colors.bright}
+label-muted-foreground = ${self.label-headphones-foreground}
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.orange}
-format-underline = ${colors.gr_med}
+format-prefix-foreground = ${colors.dorange}
+format-underline = ${colors.lgrey}
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.orange}
-format-underline = ${colors.gr_mbr}
+format-prefix-foreground = ${colors.dorange}
+format-underline = ${colors.lgrey}
 label = %percentage_used%%
 
 [module/filesystem]
@@ -143,8 +158,8 @@ interval = 25
 mount-0 = /
 
 format-mounted-prefix = " "
-format-mounted-prefix-foreground = ${colors.orange}
-format-mounted-underline = ${colors.gr_mbr}
+format-mounted-prefix-foreground = ${colors.dorange}
+format-mounted-underline = ${colors.lgrey}
 label-mounted = %free%
 
 [module/wlan]
@@ -153,13 +168,13 @@ interface = wlp3s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = ${colors.gr_med}
+format-connected-underline = ${colors.lgrey}
 label-connected = %essid%
 
 format-disconnected = <label-disconnected>
 format-disconnected-prefix = " "
-format-disconnected-prefix-foreground = ${colors.orange}
-format-disconnected-underline = ${colors.gr_med}
+format-disconnected-prefix-foreground = ${colors.dorange}
+format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = down
 
 ramp-signal-0 = 
@@ -167,7 +182,7 @@ ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ramp-signal-4 = 
-ramp-signal-foreground = ${colors.orange}
+ramp-signal-foreground = ${self.format-disconnected-prefix-foreground}
 
 [module/eth]
 type = internal/network
@@ -175,8 +190,8 @@ interface = enp4s0f2
 interval = 3.0
 
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.orange}
-format-connected-underline = ${colors.gr_mbr}
+format-connected-prefix-foreground = ${colors.dorange}
+format-connected-underline = ${colors.lgrey}
 label-connected = %local_ip%
 
 format-disconnected =
@@ -197,24 +212,24 @@ adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = ${colors.gr_med}
+format-charging-underline = ${colors.lgrey}
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${colors.gr_med}
+format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.orange}
-format-full-underline = ${colors.gr_med}
+format-full-prefix-foreground = ${colors.dorange}
+format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.orange}
+ramp-capacity-foreground = ${self.format-full-prefix-foreground}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
-animation-charging-foreground = ${colors.orange}
+animation-charging-foreground = ${self.format-full-prefix-foreground}
 animation-charging-framerate = 750
 
 [module/music]

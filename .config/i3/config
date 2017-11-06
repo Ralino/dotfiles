@@ -13,7 +13,7 @@ set $external_screen HDMI1
 
 # Font for window titles. Will also be used by the bar unless a different font
 #font pango:monospace 8
-font pango:Droid Sans Mono 10
+font pango:Fira Sans 10
 
 #Path to helper scripts
 set $helper ~/.config/i3/helper
@@ -140,6 +140,7 @@ workspace  10 output eDP1
 for_window [class="Steam"] floating enable, border normal
 for_window [class="Pinentry"] floating enable
 for_window [class="FLTK"] floating enable
+for_window [class="Skype"] floating disable
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -169,7 +170,7 @@ mode "Suspend?" {
 #Lock
 bindsym $mod+Shift+w exec --no-startup-id sleep 1; exec --no-startup-id $helper/i3lock.sh -dpms
 
-# Colors
+# Colors_deprecated
 # f0544c
 set $orange #bf3807
 set $or_bri #fc5519
@@ -180,12 +181,39 @@ set $gr_bri #888888
 set $re_drk #bf0505
 set $bright #dfdfdf
 
-# class                 border  backgr. text    indicator   child_border
-client.focused          $or_drk $orange $bright $orange     $orange
-client.focused_inactive $gr_drk $gr_med $bright $gr_med     $gr_med
-client.unfocused        #111111 $gr_drk $gr_bri $gr_drk     $gr_drk
-client.urgent           #5e0000 #900000 #f5f5f5 #900000     #900000
-client.placeholder      #000000 #0c0c0c #f5f5f5 #000000     #0c0c0c
+set_from_resource       $black          color0
+set_from_resource       $dgrey          color8
+set_from_resource       $dred           color1
+set_from_resource       $red            color9
+set_from_resource       $dgreen         color2
+set_from_resource       $green          color10
+set_from_resource       $dyellow        color3
+set_from_resource       $yellow         color11
+set_from_resource       $dblue          color4
+set_from_resource       $blue           color12
+set_from_resource       $dmagenta       color5
+set_from_resource       $magenta        color13
+set_from_resource       $dcyan          color6
+set_from_resource       $cyan           color14
+set_from_resource       $lgrey          color7
+set_from_resource       $white          color15
+
+set_from_resource       $bg             background
+set_from_resource       $fg             foreground
+
+# Reference: https://github.com/morhetz/gruvbox
+set $fg0 #fbf1c7
+set $fg2 #d5c4a1
+set $bg2 #504945
+set $dorange  #d65d0e
+set $orange #fe8019
+
+# Colorclass            border     bckgrnd    text    indicator
+client.focused          $dorange   $dorange $fg0 $dorange
+client.unfocused        $bg     $bg $fg2 $bg
+client.focused_inactive $bg2     $bg2 $fg $bg2
+client.urgent           $dred      $dred  $fg0 $dred
+
 
 # resize window (you can also use the mouse for that)
 # Pressing left will shrink the window’s width.
@@ -211,10 +239,10 @@ bindsym XF86MonBrightnessUp   exec --no-startup-id $helper/dimbacklight.sh +10
 bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -10
 
 #Audio control
-bindsym XF86AudioRaiseVolume exec --no-startup-id $helper/volume-up.sh
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
 
-bindsym XF86AudioLowerVolume exec --no-startup-id $helper/volume-down.sh
-bindsym XF86AudioMute        exec --no-startup-id $helper/volume-mute.sh
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2
+bindsym XF86AudioMute        exec --no-startup-id pamixer -m
 
 #Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -225,8 +253,8 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym $mod+n        exec --no-startup-id playerctl previous
 
 #Take screenshot
-bindsym Print exec scrot ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
-bindsym Shift+Print exec scrot -u ~/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
+bindsym Print exec scrot ~/media/bilder/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
+bindsym Shift+Print exec scrot -u ~/media/bilder/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
 
 
 #Program shortcuts
@@ -236,7 +264,7 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+d exec --no-startup-id rofi-pass
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -cd "$(xcwd)"
+bindsym $mod+Return exec i3-sensible-terminal -d "$(xcwd)"
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 #Browser
@@ -251,8 +279,8 @@ mode "Status bar" {
     bindsym p exec --no-startup-id $helper/volume-control.sh, mode "default"
 
     #Calendar
-    bindsym d exec --no-startup-id ~/github/gsimplecal/src/gsimplecal, mode "default"
-    bindsym c exec --no-startup-id ~/github/gsimplecal/src/gsimplecal, mode "default"
+    bindsym d exec --no-startup-id ~/documents/github/gsimplecal/src/gsimplecal, mode "default"
+    bindsym c exec --no-startup-id ~/documents/github/gsimplecal/src/gsimplecal, mode "default"
 
     bindsym Escape mode "default"
     bindsym $mod+o mode "default"
@@ -265,7 +293,7 @@ exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
 exec        --no-startup-id devmon --info-on-mount
-exec        --no-startup-id xflux -l 49.0 -g 8.4
+#exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off

@@ -115,9 +115,15 @@ endif
 
 " Set colorscheme
 if has("gui_running")
-    colorscheme wombat256
+    colorscheme gruvbox
+    let g:airline_theme='gruvbox'
+    set background=dark
 else
-    colorscheme wombat256i
+    colorscheme gruvbox
+    let g:airline_theme='gruvbox'
+    hi Normal ctermbg=none
+    set background=dark
+    autocmd VimEnter * hi Normal ctermbg=none
 endif
 
 "Command to remove trailing whitespace
@@ -193,13 +199,11 @@ endif
 
 " Airline settings
 set laststatus=2
-let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-if has('gui_running')
-  let g:airline_theme='simple'
-else
-  let g:airline_theme='wombat'
-endif
+let g:airline_left_alt_sep = '|'
+let g:airline_left_sep = ' '
+let g:airline_right_alt_sep = '|'
+let g:airline_right_sep = ' '
 set ttimeoutlen=10
 
 "Gitgutter
@@ -247,12 +251,3 @@ nnoremap <silent> <c-k> :wincmd k<CR>
 nnoremap <silent> <c-j> :wincmd j<CR>
 
 runtime! ftplugin/man.vim
-
-if exists('vimpager')
-    let g:vimpager = {}
-    let g:less = {}
-    set nonumber
-    set hlsearch
-    set noloadplugins
-    let g:vimpager.ansiesc = 1
-endif

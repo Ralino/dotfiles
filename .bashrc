@@ -14,11 +14,11 @@ source /usr/share/fzf/completion.bash
 alias ls='ls --color=auto'
 #PS1='[\u@\h \W]\$ '
 
-orange_bg='\[$(tput setab 192)\]'
-orange_ft='\[$(tput setaf 192)\]'
-grey_bg='\[$(tput setab 238)\]'
-grey_ft='\[$(tput setaf 238)\]'
-black_ft='\[$(tput setaf 232)\]'
+orange_bg='\[$(tput setab 246)\]'
+orange_ft='\[$(tput setaf 246)\]'
+grey_bg='\[$(tput setab 239)\]'
+grey_ft='\[$(tput setaf 239)\]'
+black_ft='\[$(tput setaf 235)\]'
 reset_clr='\[$(tput sgr0)\]'
 bold_ft='\[$(tput bold)\]'
 prompt_base="${reset_clr}${orange_ft}${grey_bg} \w${reset_clr}${grey_ft}${reset_clr} "
@@ -79,4 +79,4 @@ alias iboss-clion='iboss && clion'
 
 export TERM=rxvt-256color
 export EDITOR=vim
-export COLORTERM=urxvt
+export COLORTERM=termite

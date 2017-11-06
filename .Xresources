@@ -14,41 +14,48 @@ URxvt.scrollBar: False
 
 URxvt.saveLines: 10000
 
-!black
-*color0:  #171717
-*color8:  #737373
+!------colors-------------------------------
 
-!red
-*color1:  #FF5E5E
-*color9:  #FF7878
+! hard contrast: *background: #1d2021
+! med  contrast: *background: #282828
+! soft contrast: *background: #32302f
 
-!green
-*color2:  #9CE82B
-*color10: #9ACD32
+*background: #282828
+*foreground: #ebdbb2
 
-!yellow
-*color3:  #F0E68C
-*color11: #EEE8AA
+! Black + DarkGrey
+*color0:  #282828
+*color8:  #928374
 
-!blue
-*color4:  #008AFF
-*color12: #4F98FF
+! DarkRed + Red
+*color1:  #cc241d
+*color9:  #fb4934
 
-!magenta
-*color5:  #E88CFF
-*color13: #EDA6FF
+! DarkGreen + Green
+*color2:  #98971a
+*color10: #b8bb26
 
-!cyan
-*color6:  #87CEFA
-*color14: #B0E2FF
+! DarkYellow + Yellow
+*color3:  #d65d0e
+*color11: #fe8019
+!*color3:  #eb6e08
+!*color11: #ff8c2e
 
-!white
-*color7:  #DCDCCC
-*color15: #FFFFFF
+! DarkBlue + Blue
+*color4:  #458588
+*color12: #83a598
 
-!*background: #101010
-*foreground: #d4d4d4
+! DarkMagenta + Magenta
+*color5:  #b16286
+*color13: #d3869b
 
+! DarkCyan + Cyan
+*color6:  #689d6a
+*color14: #8ec07c
+
+! LightGrey + White
+*color7:  #a89984
+*color15: #ebdbb2
 
 !
 !
@@ -76,14 +83,14 @@ rofi.font:                           Droid Sans Mono 15
 ! set $gr_med #333333
 ! set $gr_bri #888888
 ! set $re_drk #bf0505
-!rofi.color-normal:                   #fdf6e3,#002b36,#eee8d5,#586e75,#eee8d5
-rofi.color-normal:                   #191919,#888888,#151515,#bf3807,#f5f5f5
+!rofi.color-normal:                  bg      fg      alt_bg  hlbg    lhfg
+rofi.color-normal:                   #282828,#bdae93,#3c3836,#d65d0e,#fbf1c7
 ! "Color scheme for urgent row" Set from: Default TODO
-rofi.color-urgent:                   #191919,#dc322f,#151515,#dc322f,#191919
+rofi.color-urgent:                   #282828,#cc241d,#3c3836,#cc241d,#fbf1c7
 ! "Color scheme for active row" Set from: Default
-rofi.color-active:                   #191919,#bf3807,#151515,#bf3807,#f5f5f5
-! "Color scheme window" Set from: Default
-rofi.color-window:                   #191919,#333333
+rofi.color-active:                   #282828,#cc241d,#3c3836,#cc241d,#fbf1c7
+! "Color scheme window" Set from:    bg      border    separator?
+rofi.color-window:                   #282828,#3c3836
 ! "Border width" Set from: Default
 rofi.bw:                             0
 ! "Location on screen" Set from: Default
@@ -143,7 +150,7 @@ rofi.sidebar-mode:                   true
 ! "Pre-set filter" Set from: Default
 ! rofi.filter:
 ! "Separator style (none, dash, solid)" Set from: Default
-! rofi.separator-style:                dash
+rofi.separator-style:                solid
 ! "Hide scroll-bar" Set from: Default
 ! rofi.hide-scrollbar:                 false
 ! "Fullscreen" Set from: Default
