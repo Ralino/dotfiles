@@ -9,10 +9,10 @@ Packages from the official Arch Linux repo:
 - i3-wm
 - compton
 - i3lock
-- rxvt-unicode
+- termite
 - vim
 - vimpager
-- ttf-droid
+- ttf-fira-sans
 - ttf-dejavu
 - numix-themes
 - feh
@@ -30,13 +30,10 @@ Packages from the AUR:
 - i3-swap-git
 - xflux
 - ttf-font-awesome
-- ttf-droid-sans-mono-dotted-powerline-git
 - vim-youcompleteme-git
 - vim-fzf
 - vim-airline
 - i3ipc-python-git
-
-
-Other:
-- colorscheme [wombat256i](https://github.com/dsolstad/vim-wombat256i) for vim
-- [xcwd](https://github.com/schischi/xcwd)
+- xcwd-git
+- vim-gruvbox-git
+- vim-airline-gruvbox-git
