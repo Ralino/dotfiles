@@ -7,8 +7,6 @@ echo "(Re)starting polybar(s) ..."
 $basedir/polybar.sh &
 #echo "Starting hotspot ..."
 #sudo /usr/local/bin/apstarter &
-echo "Calling hdd-manager ..."
-$basedir/hdd-manager.sh "spotify" "gimp-2.8" "audacious" "dropbox" &
 echo "Calling battery-warning ..."
 $basedir/battery-warning.sh &
 

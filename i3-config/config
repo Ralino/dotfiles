@@ -293,7 +293,7 @@ exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
 exec        --no-startup-id devmon --info-on-mount
-#exec        --no-startup-id xflux -l 49.0 -g 8.4
+exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off

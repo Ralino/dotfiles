@@ -14,22 +14,22 @@ source /usr/share/fzf/completion.bash
 alias ls='ls --color=auto'
 #PS1='[\u@\h \W]\$ '
 
-orange_bg='\[$(tput setab 246)\]'
-orange_ft='\[$(tput setaf 246)\]'
-grey_bg='\[$(tput setab 239)\]'
-grey_ft='\[$(tput setaf 239)\]'
+orange_bg='\[$(tput setab 208)\]'
+orange_ft='\[$(tput setaf 208)\]'
+grey_bg='\[$(tput setab 246)\]'
+grey_ft='\[$(tput setaf 246)\]'
+dgrey_bg='\[$(tput setab 235)\]'
+dgrey_ft='\[$(tput setaf 235)\]'
 black_ft='\[$(tput setaf 235)\]'
 reset_clr='\[$(tput sgr0)\]'
 bold_ft='\[$(tput bold)\]'
-prompt_base="${reset_clr}${orange_ft}${grey_bg} \w${reset_clr}${grey_ft}${reset_clr} "
-PS1="${orange_bg}${black_ft}\h${prompt_base}"
+#prompt_base="${reset_clr}${orange_ft}${grey_bg} \w${reset_clr}${grey_ft}${reset_clr} "
+prompt_base=" \w${reset_clr}${dgrey_ft}${reset_clr} "
+PS1="${grey_bg}${black_ft}\h${dgrey_bg}${grey_ft}${orange_ft}${prompt_base}"
 PROMPT_DIRTRIM=2
 
-alias steam-wine='WINEDEBUG=-all primusrun wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Steam/Steam.exe >/dev/null 2>&1 &'
 alias start='setsid'
 alias please='sudo $(history -p !-1)'
-
-alias ros-connect='~/docker/connect.sh'
 
 #ROS native
 ros() {
@@ -77,6 +77,6 @@ alias cd-scheduling='cd /home/ralino/fzi_job/iboss_ws/src/iboss/iboss_scheduling
 alias ros-clion='ros && clion'
 alias iboss-clion='iboss && clion'
 
-export TERM=rxvt-256color
+export TERM=xterm-termite
 export EDITOR=vim
-export COLORTERM=termite
+export COLORTERM=xterm-termite

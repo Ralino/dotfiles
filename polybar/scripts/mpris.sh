@@ -11,9 +11,9 @@ fi
 
 # Foreground color formatting tags are optional
 if [[ $player_status = "Playing" ]]; then
-    echo "%{F#BF3807}$icon %{F#DFDFDF}$metadata"
+    echo "%{F#FE8019}$icon %{F#EBDBB2}$metadata"
 elif [[ $player_status = "Paused" ]]; then
-    echo "%{F#BF3807}$icon %{F#DFDFDF}$metadata "
+    echo "%{F#FE8019}$icon %{F#EBDBB2}$metadata "
 else
     echo ""
 fi

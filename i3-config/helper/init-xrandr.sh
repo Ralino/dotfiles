@@ -1,7 +1,7 @@
 #!/bin/bash
 
 basedir=$(dirname "$0")
-external_screen=$(cat /home/ralino/.config/i3/config | grep "^set \$external_screen" | grep -o -E "[[:alnum:]]+$")
+external_screen=$(cat /home/ralino/.config/i3/config | grep "^set \$external_screen" | grep -o -E "[[:alnum:]-]+$")
 
 blsingle=1
 bldual=20
