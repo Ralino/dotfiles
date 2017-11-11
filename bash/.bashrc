@@ -17,8 +17,15 @@ HISTFILESIZE=2000
 shopt -s autocd
 shopt -s checkwinsize
 
-source /usr/share/fzf/key-bindings.bash
-source /usr/share/fzf/completion.bash
+source ~/.fzf.bash
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 orange_bg='\[$(tput setab 208)\]'
 orange_ft='\[$(tput setaf 208)\]'
@@ -51,3 +58,5 @@ bind -x '"\C-f": "/usr/bin/ranger"'
 export TERM=xterm-termite
 export EDITOR=vim
 export COLORTERM=xterm-termite
+
+source ~/.ros-env.bash
