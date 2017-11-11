@@ -9,7 +9,7 @@ packages="
   termite              $HOME/.config/termite
   tools                /usr/local/bin
   xorg-conf            /etc/X11/xorg.conf.d
-  bashrc               $HOME/.bashrc
+  bash                 $HOME
   i3suspend@.service   /etc/systemd/system/i3suspend@.service
   tmux.conf            $HOME/.tmux.conf
   vimrc                $HOME/.vimrc
@@ -18,7 +18,6 @@ packages="
   ycm-conf.py          $HOME/.vim/.ycm_extra_conf.py
 "
 
-choice=n
 install-package() {
   local file
   local target
