@@ -264,12 +264,12 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+d exec --no-startup-id rofi-pass
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -d "$(xcwd)"
-bindsym $mod+Shift+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite -d "$(xcwd)"
+bindsym $mod+Shift+Return exec termite
 
 #Browser
-bindsym XF86HomePage exec firefox-nightly
-bindsym $mod+b       exec firefox-nightly
+bindsym XF86HomePage exec firefox-trunk
+bindsym $mod+b       exec firefox-trunk
 
 #Status bar
 bindsym $mod+o mode "Status bar"
@@ -292,7 +292,6 @@ mode "Status bar" {
 exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
-exec        --no-startup-id devmon --info-on-mount
 exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
