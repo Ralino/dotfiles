@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 basedir=$(dirname "$0")
 echo "Calling init-xrandr.sh ..."

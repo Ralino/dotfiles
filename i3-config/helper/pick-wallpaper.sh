@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 
 num=0
 files="$HOME/media/bilder/foxes_wallpaper/fav/*.png"

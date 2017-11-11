@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #Makes this computer an access point with NAT when connected with enp4s0f2
 #
 #Must be run with root.

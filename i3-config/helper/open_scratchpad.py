@@ -11,7 +11,7 @@ i3 = i3ipc.Connection()
 scrpad = i3.get_tree().find_named('^scratchpad$')
 
 if scrpad == []:
-    subprocess.Popen(shlex.split('termite -t scratchpad -e \'sh -c "tmux new -A -s spad"\''));
+    subprocess.Popen(shlex.split('termite -t scratchpad -e \'bash -c "tmux new -A -s spad"\''));
     temp = []
     time_start = time.process_time()
     while temp == []:

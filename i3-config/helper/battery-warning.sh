@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 revert() {
     warn_nr=0
