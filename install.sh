@@ -9,7 +9,7 @@ packages="
   termite              $HOME/.config/termite
   tools                /usr/local/bin
   xorg-conf            /etc/X11/xorg.conf.d
-  bash-config          $HOME
+  bash                 $HOME
   i3suspend@.service   /etc/systemd/system/i3suspend@.service
   tmux.conf            $HOME/.tmux.conf
   vimrc                $HOME/.vimrc
