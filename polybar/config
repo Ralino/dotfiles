@@ -50,8 +50,8 @@ padding-right = 1
 
 module-margin = 2
 
-font-0 = Fira Sans:fontformat=truetype:size=10;2
-font-1 = Font Awesome:fontformat=truetype:size=8;2
+font-0 = Fira Sans:fontformat=truetype:size=10;0
+font-1 = Font Awesome:fontformat=truetype:size=8;-2
 
 [bar/primary]
 monitor = ${env:MONITOR:HDMI1}
@@ -145,7 +145,7 @@ label = %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.dorange}
 format-underline = ${colors.bg2}
 label = %percentage_used%%

@@ -38,7 +38,7 @@ reset_clr='\[$(tput sgr0)\]'
 bold_ft='\[$(tput bold)\]'
 #prompt_base="${reset_clr}${orange_ft}${grey_bg} \w${reset_clr}${grey_ft}${reset_clr} "
 prompt_base=" \w${reset_clr}${dgrey_ft}${reset_clr} "
-PS1="${grey_bg}${black_ft}\h${dgrey_bg}${grey_ft}${orange_ft}${prompt_base}"
+PS1="\[\e]2;\u@\h:\w\a\]${grey_bg}${black_ft}\h${dgrey_bg}${grey_ft}${orange_ft}${prompt_base}"
 PROMPT_DIRTRIM=2
 
 alias ls='ls --color=auto'

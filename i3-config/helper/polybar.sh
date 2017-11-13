@@ -5,7 +5,7 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar >/dev/null; do sleep 0.1; done
 
-polybar primary &
+polybar -l info primary &
 if $basedir/dual-head.sh; then
   polybar secondary &
 fi
