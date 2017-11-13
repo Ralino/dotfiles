@@ -7,6 +7,7 @@ packages="
   i3-config            $HOME/.config/i3
   polybar              $HOME/.config/polybar
   termite              $HOME/.config/termite
+  dunst                $HOME/.config/dunst
   tools                /usr/local/bin
   xorg-conf            /etc/X11/xorg.conf.d
   bash                 $HOME
@@ -20,16 +21,16 @@ packages="
 install-package() {
   local file
   local target
-  file=$1
-  target=$2
-  if [ -h $target ] && [ "$(readlink -f $target)" -ef "$(dirname "$0")/$file" ]; then
+  file="$1"
+  target="$2"
+  if [ -h "$target" ] && [ "$(readlink -f $target)" -ef "$(dirname "$0")/$file" ]; then
     echo "$file is already installed"
     return
   fi
 
-  if [ -e $target ]; then
-    if [ -d $target ] && [ -d $file ]; then
-      for child in $(ls $file); do
+  if [ -e "$target" ] || [ -h "$target" ]; then
+    if [ -d "$target" ] && [ -d "$file" ]; then
+      for child in $(ls -A $file); do
         install-package "$file/$child" "$target/$child"
       done
     else

@@ -209,10 +209,10 @@ set $dorange  #d65d0e
 set $orange #fe8019
 
 # Colorclass            border     bckgrnd    text    indicator
-client.focused          $dorange   $dorange $fg0 $dorange
-client.unfocused        $bg     $bg $fg2 $bg
-client.focused_inactive $bg2     $bg2 $fg $bg2
-client.urgent           $dred      $dred  $fg0 $dred
+client.focused          $dorange   $dorange   $fg0    $dorange
+client.unfocused        $bg        $bg        $fg2    $bg
+client.focused_inactive $bg2       $bg2       $fg     $bg2
+client.urgent           $dred      $dred      $fg0    $dred
 
 
 # resize window (you can also use the mouse for that)
@@ -292,6 +292,9 @@ mode "Status bar" {
 exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
+exec        --no-startup-id dunst
+exec        --no-startup-id devmon --exec-on-drive 'notify-send -u normal "Mounted new device" "%l\nDevice: %f"'\
+                                   --exec-on-remove 'notify-send -u normal "Removed device" "%l"'
 exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
