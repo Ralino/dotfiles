@@ -7,6 +7,7 @@ packages="
   i3-config            $HOME/.config/i3
   polybar              $HOME/.config/polybar
   termite              $HOME/.config/termite
+  dunst                $HOME/.config/dunst
   tools                /usr/local/bin
   xorg-conf            /etc/X11/xorg.conf.d
   bash                 $HOME
