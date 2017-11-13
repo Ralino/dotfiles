@@ -178,8 +178,8 @@ let g:ycm_server_python_interpreter = "/usr/bin/python2"
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_error_symbol = '!'
-let g:ycm_warning_symbol = '!'
+let g:ycm_error_symbol = ''
+let g:ycm_warning_symbol = ''
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_complete_in_comments = 1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
