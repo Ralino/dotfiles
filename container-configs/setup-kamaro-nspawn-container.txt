@@ -1,0 +1,83 @@
+On host:
+$ pacaur -S debootstrap gnupg1 ubuntu-keyring xhost
+# cd /var/lib/machines
+The name (here kamaro) cannot contain dashes!
+# debootstrap xenial kamaro http://de.archive.ubuntu.com/ubuntu/
+Set root password:
+# systemd-nspawn -M kamaro
+  | # passwd
+  \ # logout
+
+Start container:
+# systemd-nspawn -bM kamaro
+  | *Login as root*
+  | We want to use resolv from host, so disable it here:
+  | # systemctl disable resolvconf.service
+  |
+  | Create user:
+  | # groupadd admin
+  | # useradd -m -G admin -s /bin/bash <username>
+  | # passwd <username>
+  |
+  | Enable autologin:
+  | # systemctl edit container-getty@.service
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --noclear --autologin <username> --keep-baud pts/%I 115200,38400,9600 $TERM
+  \ # poweroff
+
+On host:
+# vim /etc/systemd/nspawn/kamaro.nspawn
+[Files]
+Bind=<your workspace here>
+BindReadOnly=/tmp/.X11-unix/X0
+BindReadOnly=/etc/resolv.conf
+
+Start container again:
+# systemd-nspawn -bM kamaro
+  | *Login as root or with user*
+  | populate /etc/apt/sources.list with the following:
+deb http://de.archive.ubuntu.com/ubuntu xenial-updates main restricted universe multiverse
+
+deb http://de.archive.ubuntu.com/ubuntu xenial main restricted universe multiverse
+
+deb http://de.archive.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
+
+deb http://de.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+  |
+  | markdev throws some errors when in container:
+  | # apt-mark hold makedev
+  | # apt update
+  | # apt upgrade
+  | # apt install dbus
+  |
+  \ # poweroff
+
+On host:
+# systemctl edit systemd-nspawn@.service
+[Service]
+ExecStart=
+ExecStart=/usr/bin/systemd-nspawn --quiet --keep-unit --boot --link-journal=try-guest --machine=%I
+
+To allow windows from X11 to show on host$:
+xhost +local:
+(You can also add it to your .xinitrc)
+
+You can now start the container with machinectl:
+# machinectl start kamaro
+And login:
+# machinectl login kamaro
+  | *You should be automatically logged in*
+  |
+  | echo "export DISPLAY=:0" >> ~/.bashrc
+  | export DISPLAY=:0
+  |
+  | Install ROS Kinetic: http://wiki.ros.org/kinetic/Installation/Ubuntu
+
+Some tips:
+
+To get out of container press ^]^]^] (thats Strg+AltGr+9 on a german layout)
+
+/var/lib/machines is root only:
+# chmod +x /var/lib/machines/
+

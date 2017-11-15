@@ -1,0 +1,68 @@
+#Run once:
+#
+# sudo apt install wget bash-completion tmux vim
+# wget https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo
+# tic -x termite.terminfo
+
+#if not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+#disable Ctrl-S
+stty -ixon
+
+# TMUX
+if which tmux >/dev/null 2>&1; then
+    #if not inside a tmux session, and if no session is started, start a new session
+    test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
+
+#do not put duplicate lines or lines starting with space in the history
+HISTCONTROL=ignoreboth
+
+#append to history
+shopt -s histappend
+
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+shopt -s autocd
+shopt -s checkwinsize
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+orange_bg='\[$(tput setab 208)\]'
+orange_ft='\[$(tput setaf 208)\]'
+grey_bg='\[$(tput setab 108)\]'
+grey_ft='\[$(tput setaf 108)\]'
+dgrey_bg='\[$(tput setab 235)\]'
+dgrey_ft='\[$(tput setaf 235)\]'
+black_ft='\[$(tput setaf 235)\]'
+reset_clr='\[$(tput sgr0)\]'
+bold_ft='\[$(tput bold)\]'
+prompt_base="${reset_clr}${dgrey_bg}${grey_ft}${orange_ft} \w${reset_clr}${dgrey_ft}${reset_clr} "
+PS1="\[\e]2;\u@\h:\w - ROS2\a\]${grey_bg}${black_ft}${bold_ft}ROS2${prompt_base}"
+PROMPT_DIRTRIM=2
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias start='setsid'
+alias please='sudo $(history -p !-1)'
+
+export TERM=xterm-termite
+export EDITOR=vim
+export COLORTERM=xterm-termite
+export DISPLAY=:0
+
+#iBOSS
+source /home/ralino/ros2_ws/install/local_setup.bash
+source /home/ralino/fzi/iboss_ws/install/local_setup.bash
+alias cd-ws="cd /home/ralino/fzi/iboss_ws/"

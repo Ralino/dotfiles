@@ -7,6 +7,8 @@ relative_to_config = False
 find_compilation_database = True
 global_compilation_database_folder = ''
 use_neighbor_file = True
+container_root = '' #empty if not built in container
+bound_folder   = ''
 
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
@@ -65,6 +67,8 @@ def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
       make_next_absolute = False
       if not flag.startswith( '/' ):
         new_flag = os.path.join( working_directory, flag )
+      if not new_flag.startswith(bound_folder):
+        new_flag = container_root + new_flag
 
     for path_flag in path_flags:
       if flag == path_flag:
@@ -72,8 +76,10 @@ def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
         break
 
       if flag.startswith( path_flag ):
-        path = flag[ len( path_flag ): ]
-        new_flag = path_flag + os.path.join( working_directory, path )
+        path = os.path.join(working_directory, flag[ len( path_flag ): ])
+        if not path.startswith(bound_folder):
+          path = container_root + path
+        new_flag = path_flag + path
         break
 
     if new_flag:
