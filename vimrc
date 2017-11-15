@@ -127,6 +127,10 @@ else
     autocmd VimEnter * hi Normal ctermbg=none
 endif
 
+" Disable bell
+set vb
+set t_vb=
+
 "Command to remove trailing whitespace
 if !exists(":Retrail")
     command Retrail :%s/\s\+$//e

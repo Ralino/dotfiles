@@ -6,6 +6,7 @@ import ycm_core
 relative_to_config = False
 find_compilation_database = True
 global_compilation_database_folder = ''
+use_neighbor_file = True
 
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
@@ -122,6 +123,12 @@ def FlagsForFile( filename ):
         if srcfile:
           logger.info('Found source: %s', srcfile)
           compilation_info = database.GetCompilationInfoForFile(srcfile)
+
+    if len(compilation_info.compiler_flags_) == 0 and use_neighbor_file:
+      for f in os.listdir(os.path.basename(filename)):
+        compilation_info = database.GetCompilationInfoForFile(os.path.abspath(os.path.basename(filename) + os.path.sep + f))
+        if len(compilation_info.compiler_flags_) != 0:
+          break
 
   if compilation_info and len(compilation_info.compiler_flags_) != 0:
     final_flags = MakeRelativePathsInFlagsAbsolute(
