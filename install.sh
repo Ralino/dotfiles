@@ -40,7 +40,7 @@ install-package() {
     fi
   else
     if ! ln -sr $(dirname "$0")/$1 $target; then
-      read -e -p "Failed to link to $target! May I try with root? [Y/n]" choice
+      read -e -p "$(tput setaf 1)Failed to link to $target! May I try with root? [Y/n]$(tput sgr0)" choice
       if [[ "$choice" == [Nn]* ]]; then
         return
       fi

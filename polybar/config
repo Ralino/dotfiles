@@ -120,15 +120,15 @@ label-headphones-foreground = ${colors.fg}
 label-volume = %percentage%%
 label-volume-foreground = ${self.label-headphones-foreground}
 
-ramp-volume-0 = ""
-ramp-volume-1 = ""
-ramp-volume-2 = ""
+ramp-volume-0 = " "
+ramp-volume-1 = " "
+ramp-volume-2 = " "
 ramp-volume-foreground = ${colors.dorange}
 
-ramp-headphones-0 = ""
-ramp-headphones-1 = ""
+ramp-headphones-0 = " "
+ramp-headphones-1 = " "
 
-format-muted-prefix = ""
+format-muted-prefix = " "
 format-muted-foreground = ${self.ramp-volume-foreground}
 format-muted-underline = ${self.format-volume-underline}
 label-muted = muted

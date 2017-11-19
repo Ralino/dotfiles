@@ -1,0 +1,80 @@
+#!/bin/bash
+
+if [ "$(whoami)" != "root" ]; then
+  echo "Must be run as root!"
+  exit 3
+fi
+
+cmd="login"
+if [ "$1" == "start" ] || [ "$1" == "stop" ] || [ "$1" == "login" ] || [ "$1" == "status" ]; then
+  cmd="$1"
+  shift
+fi
+machine="$1"
+nostart="$(echo "$machine" | grep -E "arm$")"
+running="$(machinectl list | grep -E "^$machine")"
+
+# Make machines dir accessible for users
+chmod +rx /var/lib/machines
+
+if [ "$cmd" == "start" ]; then
+  if [ "$nostart" ]; then
+    echo "Cannot start an ARM machine"
+    exit 2
+  fi
+  if [ "$running" ]; then
+    echo "Machine is already running"
+    exit 2
+  fi
+  if machinectl start "$machine"; then
+    exit 0
+  else
+    echo "Failed to start machine $machine"
+    exit 1
+  fi
+fi
+
+if [ "$cmd" == "stop" ]; then
+  if [ -z "$running" ]; then
+    echo "Machine is not running"
+    exit 2
+  fi
+  if machinectl poweroff "$machine"; then
+    exit 0
+  else
+    echo "Failed to stop machine $machine"
+    exit 1
+  fi
+fi
+
+if [ "$cmd" == "login" ]; then
+  if [ "$nostart" ]; then
+    if systemd-nspawn -M "$machine"; then
+      exit 0
+    else
+      echo "Failed to open shell on machine $machine"
+      exit 1
+    fi
+  fi
+  if [ -z "$running" ]; then
+    if machinectl start "$machine"; then
+      echo "Starting machine . . ."
+      #TODO wait explicitly
+      sleep 3
+    else
+      echo "Failed to start machine $machine"
+      exit 1
+    fi
+  fi
+  if machinectl login "$machine"; then
+    exit 0
+  else
+    echo "Failed to login on machine $machine"
+    exit 1
+  fi
+fi
+
+if [ "$cmd" == "status" ]; then
+  machinectl status "$machine"
+  exit 0
+fi

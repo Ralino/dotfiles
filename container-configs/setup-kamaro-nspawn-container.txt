@@ -69,8 +69,9 @@ And login:
 # machinectl login kamaro
   | *You should be automatically logged in*
   |
-  | echo "export DISPLAY=:0" >> ~/.bashrc
-  | export DISPLAY=:0
+  | $ echo "export DISPLAY=:0" >> ~/.bashrc
+  | $ export DISPLAY=:0
+  | You might want to change the prompt as well to avoid confusion
   |
   | Install ROS Kinetic: http://wiki.ros.org/kinetic/Installation/Ubuntu
 
@@ -79,5 +80,5 @@ Some tips:
 To get out of container press ^]^]^] (thats Strg+AltGr+9 on a german layout)
 
 /var/lib/machines is root only:
-# chmod +x /var/lib/machines/
+# setfacl -m "user:<username>:rx" /var/lib/machines/
 

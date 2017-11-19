@@ -8,7 +8,7 @@ find_compilation_database = True
 global_compilation_database_folder = ''
 use_neighbor_file = True
 container_root = '' #empty if not built in container
-bound_folder   = ''
+bound_folders   = []
 
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
@@ -67,7 +67,7 @@ def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
       make_next_absolute = False
       if not flag.startswith( '/' ):
         new_flag = os.path.join( working_directory, flag )
-      if not new_flag.startswith(bound_folder):
+      if len(list(filter(new_flag.startswith, bound_folder))) == 0:
         new_flag = container_root + new_flag
 
     for path_flag in path_flags:
@@ -131,8 +131,8 @@ def FlagsForFile( filename ):
           compilation_info = database.GetCompilationInfoForFile(srcfile)
 
     if len(compilation_info.compiler_flags_) == 0 and use_neighbor_file:
-      for f in os.listdir(os.path.basename(filename)):
-        compilation_info = database.GetCompilationInfoForFile(os.path.abspath(os.path.basename(filename) + os.path.sep + f))
+      for f in os.listdir(os.path.dirname(filename)):
+        compilation_info = database.GetCompilationInfoForFile(os.path.abspath(os.path.dirname(filename) + os.path.sep + f))
         if len(compilation_info.compiler_flags_) != 0:
           break
 

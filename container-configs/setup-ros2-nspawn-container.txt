@@ -59,13 +59,18 @@ On host:
 ExecStart=
 ExecStart=/usr/bin/systemd-nspawn --quiet --keep-unit --boot --link-journal=try-guest --machine=%I
 
+To allow windows from X11 to show on host (run or add it to ~/.xinitrc):
+$ xhost +local:
+
 You can now start the container with machinectl:
 # machinectl start ros2
 And login:
 # machinectl login ros2
   | *You should be automatically logged in*
   |
-  | echo "export DISPLAY=:0" >> ~/.bashrc
+  | $ echo "export DISPLAY=:0" >> ~/.bashrc
+  | $ export DISPLAY=:0
+  | You might want to change the prompt as well to avoid confusion
   |
   | Follow the ros2 install guide: https://github.com/ros2/ros2/wiki/Linux-Development-Setup
   |
@@ -77,7 +82,5 @@ Some tips:
 To get out of container press ^]^]^] (thats Strg+AltGr+9 on a german layout)
 
 /var/lib/machines is root only:
-# chmod +x /var/lib/machines/
+# setfacl -m "user:<username>:rx" /var/lib/machines
 
-To allow windows from X11 to show on host (run or add it to ~/.xinitrc):
-$ xhost +local:

@@ -46,6 +46,8 @@ alias alert='notify-send --urgency=normal "$([ $? = 0 ] && echo Finished || echo
 alias start='setsid'
 alias please='sudo $(history -p !-1)'
 alias gits='git status'
+alias nspawn='sudo nspawn'
+alias con='sudo nspawn'
 
 bind -x '"\C-f": "/usr/bin/ranger"'
 
