@@ -215,13 +215,6 @@ set ttimeoutlen=10
 set updatetime=250
 let g:gitgutter_map_keys = 0
 
-" Special syntax settings
-au BufNewFile,BufRead,BufEnter *.frag,*.vert,*.fp,*.glsl setf glsl
-autocmd FileType glsl set cindent
-
-" ROS launch files
-au BufNewFile,BufRead,BufEnter *.launch setf xml
-
 " NERDtree
 if !exists(':Nt')
   command Nt :NERDTreeToggle
@@ -249,10 +242,24 @@ if !exists(':Tb')
   command Tb :TagbarToggle
 endif
 
+" disable overkill c++ syntax highlighting
+let g:polyglot_disabled = ['c++11','c/c++']
+
+" OpenGL syntax settings
+au BufNewFile,BufRead,BufEnter *.frag,*.vert,*.fp,*.glsl setf glsl
+
+" ROS launch files
+au BufNewFile,BufRead,BufEnter *.launch setf xml
+
 " Easier window navigation
 nnoremap <silent> <c-l> :wincmd l<CR>
 nnoremap <silent> <c-h> :wincmd h<CR>
 nnoremap <silent> <c-k> :wincmd k<CR>
 nnoremap <silent> <c-j> :wincmd j<CR>
+
+" Stop latex suite from overwriting my keymaps
+nmap <SID>idontneedthis <Plug>IMAP_JumpForward
+" imap <SID>idontneedthis <Plug>IMAP_JumpForward
+vmap <SID>idontneedthis <Plug>IMAP_JumpForward
 
 runtime! ftplugin/man.vim
