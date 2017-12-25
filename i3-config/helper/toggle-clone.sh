@@ -1,4 +1,5 @@
 #!/bin/bash
+basedir=$(dirname "$0")
 
 STATUS=$(xrandr -q)
 HORIZONTAL=$( echo "$STATUS" | grep -o -E "current [0-9]{4} x [0-9]{3}" | cut -b 9-13 )
@@ -36,3 +37,5 @@ then
 else
     feh --bg-scale $(~/.config/i3/helper/pick-wallpaper.sh 2)
 fi
+
+$basedir/polybar.sh

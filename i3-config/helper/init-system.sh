@@ -9,5 +9,3 @@ $basedir/polybar.sh &
 #sudo /usr/local/bin/apstarter &
 echo "Calling battery-warning ..."
 $basedir/battery-warning.sh &
-
-synclient TapButton1=1

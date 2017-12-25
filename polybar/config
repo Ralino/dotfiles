@@ -74,6 +74,19 @@ modules-center = music date
 
 inherit = bar/base
 
+[bar/clone]
+monitor = ${env:MONITOR:HDMI1}
+monitor-fallback = ${env:MONITOR:eDP1}
+
+modules-left = i3-clone
+modules-center = music date
+modules-right = volume memory cpu wlan eth battery
+
+tray-position = right
+tray-padding = 3
+
+inherit = bar/base
+
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
@@ -81,6 +94,7 @@ index-sort = true
 enable-scroll = false
 
 ; Only show workspaces on the same output as the bar
+; TODO does not work for duplicate screen
 pin-workspaces = true
 
 label-mode-padding = 2
@@ -107,6 +121,11 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %name%
 label-urgent-underline = ${colors.dred}
 label-urgent-padding = 2
+
+[module/i3-clone]
+inherit = module/i3
+
+pin-workspaces = false
 
 [module/volume]
 type = internal/volume
