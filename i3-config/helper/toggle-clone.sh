@@ -9,9 +9,9 @@ then
     echo "HDMI1"
     if [  "$HORIZONTAL" -lt "1921" ]
     then
-        xrandr --output HDMI1 --auto --primary --right-of eDP1
+        xrandr --output HDMI1 --auto --primary --right-of LVDS1
     else
-        xrandr --output HDMI1 --auto --output eDP1 --auto --same-as HDMI1
+        xrandr --output HDMI1 --auto --output LVDS1 --auto --same-as HDMI1
     fi
 else
     if [ -z "$( echo "$STATUS" | grep -o -E "VGA1 disconnected")" ]
@@ -19,12 +19,12 @@ else
         echo "VGA1"
         if [  "$HORIZONTAL" -lt "1921" ]
         then
-            xrandr --output VGA1 --auto --primary --right-of eDP1
+            xrandr --output VGA1 --auto --primary --right-of LVDS1
         else
-            xrandr --output VGA1 --auto --output eDP1 --auto --same-as VGA1
+            xrandr --output VGA1 --auto --output LVDS1 --auto --same-as VGA1
         fi
     else
-        xrandr --output eDP1 --auto --primary --output HDMI1 --off --output VGA1 --off
+        xrandr --output LVDS1 --auto --primary --output HDMI1 --off --output VGA1 --off
     fi
 fi
 

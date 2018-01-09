@@ -13,7 +13,7 @@ set $external_screen HDMI1
 
 # Font for window titles. Will also be used by the bar unless a different font
 #font pango:monospace 8
-font pango:Fira Sans 10
+font pango:Fira Sans 9
 
 #Path to helper scripts
 set $helper ~/.config/i3/helper
@@ -121,17 +121,17 @@ bindsym $mod+Control+9 move container to workspace number 9
 bindsym $mod+Control+0 move container to workspace number 10
 
 # Assign workspaces to screens
-workspace  1 output $external_screen
-workspace  2 output $external_screen
-workspace  3 output $external_screen
-workspace  4 output $external_screen
-workspace  5 output $external_screen
-
-workspace  6  output eDP1
-workspace  7  output eDP1
-workspace  8  output eDP1
-workspace  9  output eDP1
-workspace  10 output eDP1
+#workspace  1 output $external_screen
+#workspace  2 output $external_screen
+#workspace  3 output $external_screen
+#workspace  4 output $external_screen
+#workspace  5 output $external_screen
+#
+#workspace  6  output LVDS1
+#workspace  7  output LVDS1
+#workspace  8  output LVDS1
+#workspace  9  output LVDS1
+#workspace  10 output LVDS1
 
 #workspace $presentation output VGA1 #FIXME
 
@@ -141,6 +141,8 @@ for_window [class="Steam"] floating enable, border normal
 for_window [class="Pinentry"] floating enable
 for_window [class="FLTK"] floating enable
 for_window [class="Skype"] floating disable
+for_window [class="Florence"] floating enable, border none
+for_window [class="XVkbd"] floating enable, border none
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -242,7 +244,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -10
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
 
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2
-bindsym XF86AudioMute        exec --no-startup-id pamixer -m
+bindsym XF86AudioMute        exec --no-startup-id pamixer -t
 
 #Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -268,8 +270,8 @@ bindsym $mod+Return exec i3-sensible-terminal -d "$(xcwd)"
 bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 #Browser
-bindsym XF86HomePage exec firefox-nightly
-bindsym $mod+b       exec firefox-nightly
+bindsym XF86HomePage exec firefox
+bindsym $mod+b       exec firefox
 
 #Status bar
 bindsym $mod+o mode "Status bar"
@@ -290,12 +292,13 @@ mode "Status bar" {
 #STARTUP
 
 exec_always --no-startup-id $helper/init-system.sh
-exec_always --no-startup-id synclient TapButton1=1
+#exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
 exec        --no-startup-id dunst
+exec        --no-startup-id easystroke
 exec        --no-startup-id devmon --exec-on-drive 'notify-send -u normal "Mounted new device" "%l\nDevice: %f"'\
                                    --exec-on-remove 'notify-send -u normal "Removed device" "%l"'
-exec        --no-startup-id xflux -l 49.0 -g 8.4
+#exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off

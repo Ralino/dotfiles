@@ -23,7 +23,7 @@ if (( $bldual < 1 )) || (( $bldual > 100 )); then
 fi
 
 if $basedir/dual-head.sh; then
-    xrandr --output $external_screen --auto --primary --right-of eDP1
+    xrandr --output $external_screen --auto --primary --right-of LVDS1
     xbacklight -set $bldual
     feh --bg-scale $($basedir/pick-wallpaper.sh 2)
 
@@ -31,7 +31,7 @@ if $basedir/dual-head.sh; then
     sleep 0.5
     xdotool mousemove_relative 1 0
 else
-    xrandr --output eDP1 --auto --primary --output HDMI1 --off --output VGA1 --off
+    xrandr --output LVDS1 --auto --primary --output HDMI1 --off --output VGA1 --off
     xbacklight -set $blsingle
     feh --bg-scale $($basedir/pick-wallpaper.sh 1)
 fi

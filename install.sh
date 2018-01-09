@@ -3,7 +3,6 @@
 # Installs the dotfiles
 
 packages="
-  gsimplecal           $HOME/.config/gsimplecal
   i3-config            $HOME/.config/i3
   polybar              $HOME/.config/polybar
   termite              $HOME/.config/termite
