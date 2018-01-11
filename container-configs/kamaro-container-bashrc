@@ -1,6 +1,6 @@
 #Run once:
 #
-# sudo apt install wget bash-completion tmux vim
+# sudo apt install wget bash-completion vim
 # wget https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo
 # tic -x termite.terminfo
 
@@ -62,7 +62,7 @@ export PKG_CONFIG_PATH="/opt/ros/kinetic/lib/pkgconfig:$PKG_CONFIG_PATH"
 source /home/ralino/kamaro/catkin_ws/devel/setup.bash
 alias cd-ws="cd /home/ralino/kamaro/catkin_ws/"
 
-onnect with Beteigeuze
+#Connect with Beteigeuze
 btr() {
     export ROS_MASTER_URI=http://192.168.1.42:11311
     export ROS_IP=`ip a| sed -En 's/.*inet (addr:)?(192.([0-9]*\.){2}[0-9]*).*/\2/p'` # This forces ROS to identify this computer using its IP instead of the hostname which the robot cannot resolve

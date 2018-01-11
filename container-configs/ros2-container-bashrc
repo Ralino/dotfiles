@@ -1,6 +1,6 @@
 #Run once:
 #
-# sudo apt install wget bash-completion tmux vim
+# sudo apt install wget bash-completion vim
 # wget https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo
 # tic -x termite.terminfo
 
@@ -57,6 +57,6 @@ export COLORTERM=xterm-termite
 export DISPLAY=:0
 
 #iBOSS
-source /home/ralino/ros2_ws/install/local_setup.bash
+source /home/ralino/fzi/ros2_ws/install/local_setup.bash
 source /home/ralino/fzi/iboss_ws/install/local_setup.bash
 alias cd-ws="cd /home/ralino/fzi/iboss_ws/"

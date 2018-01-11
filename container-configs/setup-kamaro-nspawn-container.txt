@@ -1,7 +1,11 @@
 On host:
-$ pacaur -S debootstrap gnupg1 ubuntu-keyring xhost
+# pacman -S debootstrap ubuntu-keyring xorg-xhost
+$ trizen -S gnupg1
 # cd /var/lib/machines
 The name (here kamaro) cannot contain dashes!
+/*if on btrfs do:
+# sudo btrfs subvolume create kamaro
+*/
 # debootstrap xenial kamaro http://de.archive.ubuntu.com/ubuntu/
 Set root password:
 # systemd-nspawn -M kamaro
@@ -16,6 +20,7 @@ Start container:
   |
   | Create user:
   | # groupadd admin
+  | Username should be the same as your username on host, makes bindings easier
   | # useradd -m -G admin -s /bin/bash <username>
   | # passwd <username>
   |
@@ -81,4 +86,5 @@ To get out of container press ^]^]^] (thats Strg+AltGr+9 on a german layout)
 
 /var/lib/machines is root only:
 # setfacl -m "user:<username>:rx" /var/lib/machines/
+This will be lost on reboot though, so creating a script might be useful
 
