@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+#Disable Ctrl-S
+stty -ixon
+
 #do not put duplicate lines or lines starting with space in the history
 HISTCONTROL=ignoreboth
 
