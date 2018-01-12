@@ -13,7 +13,7 @@ set $external_screen HDMI1
 
 # Font for window titles. Will also be used by the bar unless a different font
 #font pango:monospace 8
-font pango:Fira Sans 10
+font pango:Fira Sans 9
 
 #Path to helper scripts
 set $helper ~/.config/i3/helper
@@ -242,7 +242,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -10
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
 
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2
-bindsym XF86AudioMute        exec --no-startup-id pamixer -m
+bindsym XF86AudioMute        exec --no-startup-id pamixer -t
 
 #Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -291,7 +291,7 @@ mode "Status bar" {
 
 exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id synclient TapButton1=1
-exec_always --no-startup-id $helper/workspace_manager.py
+#exec_always --no-startup-id $helper/debug-i3-workspace-manager.sh
 exec        --no-startup-id dunst
 exec        --no-startup-id devmon --exec-on-drive 'notify-send -u normal "Mounted new device" "%l\nDevice: %f"'\
                                    --exec-on-remove 'notify-send -u normal "Removed device" "%l"'

@@ -14,6 +14,11 @@ machine="$1"
 nostart="$(echo "$machine" | grep -E "arm$")"
 running="$(machinectl list | grep -E "^$machine")"
 
+if [ "$2" ]; then
+  echo "Too many arguments."
+  exit 2
+fi
+
 # Make machines dir accessible for users
 chmod +rx /var/lib/machines
 

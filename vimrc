@@ -20,6 +20,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'sheerun/vim-polyglot'
+"Plugin 'nvie/vim-flake8'
 
 call vundle#end()
 filetype plugin indent on
