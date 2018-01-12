@@ -61,6 +61,8 @@ source /opt/ros/kinetic/setup.bash
 export PKG_CONFIG_PATH="/opt/ros/kinetic/lib/pkgconfig:$PKG_CONFIG_PATH"
 source /home/ralino/kamaro/catkin_ws/devel/setup.bash
 alias cd-ws="cd /home/ralino/kamaro/catkin_ws/"
+export ROS_HOSTNAME=localhost
+export ROS_MASTER_URI=http://localhost:11311
 
 #Connect with Beteigeuze
 btr() {
