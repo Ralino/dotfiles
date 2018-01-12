@@ -15,6 +15,7 @@ packages="
   tmux.conf            $HOME/.tmux.conf
   vimrc                $HOME/.vimrc
   xinitrc              $HOME/.xinitrc
+  bash_profile         $HOME/.bash_profile
   Xresources           $HOME/.Xresources
   ycm-conf.py          $HOME/.vim/.ycm_extra_conf.py
   compton.conf         $HOME/.config/compton.conf
