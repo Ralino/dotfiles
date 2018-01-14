@@ -23,7 +23,7 @@ if (( $bldual < 1 )) || (( $bldual > 100 )); then
 fi
 
 if $basedir/dual-head.sh; then
-    xrandr --output $external_screen --auto --primary --right-of eDP1
+    xrandr --output $external_screen --auto --primary --left-of eDP1
     xbacklight -set $bldual
     feh --bg-scale $($basedir/pick-wallpaper.sh 2)
 

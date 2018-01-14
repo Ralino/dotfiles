@@ -9,7 +9,7 @@ then
     echo "HDMI1"
     if [  "$HORIZONTAL" -lt "1921" ]
     then
-        xrandr --output HDMI1 --auto --primary --right-of eDP1
+        xrandr --output HDMI1 --auto --primary --left-of eDP1
     else
         xrandr --output HDMI1 --auto --output eDP1 --auto --same-as HDMI1
     fi
@@ -19,7 +19,7 @@ else
         echo "VGA1"
         if [  "$HORIZONTAL" -lt "1921" ]
         then
-            xrandr --output VGA1 --auto --primary --right-of eDP1
+            xrandr --output VGA1 --auto --primary --left-of eDP1
         else
             xrandr --output VGA1 --auto --output eDP1 --auto --same-as VGA1
         fi
