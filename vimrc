@@ -21,7 +21,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'vim-syntastic/syntastic'
-"Plugin 'nvie/vim-flake8'
+Plugin 'morhetz/gruvbox'
+Plugin 'vim-airline/vim-airline'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -180,9 +182,7 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 
 " YouCompleteMe settings
-let g:ycm_server_python_interpreter = "/usr/bin/python2"
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_python_binary_path = 'python'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_error_symbol = ''
