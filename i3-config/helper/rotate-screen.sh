@@ -15,3 +15,5 @@ else
 fi
 
 fc-cache
+
+i3-msg restart

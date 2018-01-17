@@ -31,6 +31,11 @@ class_map = {
     "Termite": termite_map,
     "Polybar": "",
     "Cellwriter": "",
+    "gnome-pie-211": "",
+    "gnome-pie-481": "",
+    "gnome-pie-552": "",
+    "gnome-pie-575": "",
+    "gnome-pie-856": "",
     "Pavucontrol": ""
 }
 
@@ -48,15 +53,15 @@ def get_ws_name(con):
         for pair in mapped_name:
             if pair[0].fullmatch(con.name):
                 return pair[1]
-        #Should not get here, make aware if it does
+        # Should not get here, make aware if it does
         return "DEFAULTMISSING"
     else:
         return mapped_name
 
 
 def on_focus_change(i3, e):
-   focused = i3.get_tree().find_focused()
-   set_workspace_name(focused.workspace(), get_ws_name(focused))
+    focused = i3.get_tree().find_focused()
+    set_workspace_name(focused.workspace(), get_ws_name(focused))
 
 
 def set_workspace_name(ws, new_name):

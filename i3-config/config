@@ -13,7 +13,9 @@ set $external_screen HDMI1
 
 # Font for window titles. Will also be used by the bar unless a different font
 #font pango:monospace 8
-font pango:Fira Sans 9
+font pango:Fira Sans 8
+
+hide_edge_borders vertical
 
 #Path to helper scripts
 set $helper ~/.config/i3/helper
@@ -239,8 +241,8 @@ bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 #KEY-BINDINGS
 
 #Set screen brightness
-bindsym XF86MonBrightnessUp   exec --no-startup-id $helper/dimbacklight.sh +10
-bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -10
+bindsym XF86MonBrightnessUp   exec --no-startup-id $helper/dimbacklight.sh +5
+bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -5
 
 #Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
@@ -302,24 +304,18 @@ exec_always --no-startup-id $helper/workspace_manager.py
 exec        --no-startup-id dunst
 exec        --no-startup-id devmon --exec-on-drive 'notify-send -u normal "Mounted new device" "%l\nDevice: %f"'\
                                    --exec-on-remove 'notify-send -u normal "Removed device" "%l"'
-#exec        --no-startup-id xflux -l 49.0 -g 8.4
+exec        --no-startup-id xflux -l 49.0 -g 8.4
 exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off
 exec        --no-startup-id nm-applet
 
 exec        --no-startup-id easystroke
-exec        --no-startup-id cellwriter --hide-window
 #TODO install correctly (create patch to not make it a dock)
 exec        --no-startup-id ~/documents/github/Gnome-Pie/gnome-pie
 
 #FIXME does not work in xorg-conf
 exec        --no-startup-id xsetwacom --set "Wacom ISDv4 90 Pen stylus" Threshold 15
 exec        --no-startup-id xsetwacom --set "Wacom ISDv4 90 Pen eraser" Threshold 15
-
-#Set correct subpixeling for non rotated screen
-exec        --no-startup-id rm -f ~/.config/fontconfig/fonts.conf/10-sub-pixel-*
-exec        --no-startup-id ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf ~/.config/fontconfig/fonts.conf
-exec        --no-startup-id fc-cache
 
 focus_follows_mouse no

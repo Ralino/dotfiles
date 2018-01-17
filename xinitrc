@@ -40,6 +40,11 @@ pactl load-module module-x11-bell sample=x11-bell display=$DISPLAY
 
 xset b 100
 
+#subpixeling
+rm -f ~/.config/fontconfig/fonts.conf/10-sub-pixel-*
+ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf ~/.config/fontconfig/fonts.conf
+fc-cache
+
 #gnome keyring
 dbus-update-activation-environment --systemd DISPLAY
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)

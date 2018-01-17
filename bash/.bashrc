@@ -51,7 +51,6 @@ alias please='sudo $(history -p !-1)'
 alias gits='git status'
 alias nspawn='sudo nspawn'
 alias con='sudo nspawn'
-alias pacaur='echo "R.I.P pacaur :("; trizen'
 
 bind -x '"\C-f": "/usr/bin/ranger"'
 
