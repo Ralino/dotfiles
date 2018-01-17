@@ -7,71 +7,55 @@ if [ "$(whoami)" != "root" ]; then
 fi
 
 create_snapshots() {
-  echo "Mounting ${btrfs_root} . . ."
-  if ! mount $btrfs_root; then
-    #TODO do not fail when already mounted (and do not unmount then either)
-    echo "$(tput setaf 1)Failed to mount ${btrfs_root}$(tput sgr0)"
-    exit 1
-  fi
-
   for volume in $subvolumes; do
+    volume_dir=$(echo "${volume}" | sed -e "s/^@//")
     if [ ! -d "${btrfs_root}/${volume}" ]; then
       echo "$(tput setaf 1)Failed to find subvolume ${volume}, Skipping . . .$(tput sgr0)"
       continue
     fi
-    if [ ! -d "${btrfs_root}/snapshots/${volume}" ]; then
+    if [ ! -d "${btrfs_root}/snapshots/${volume_dir}" ]; then
       echo "$(tput setaf 1)Failed to find snapshot folder for subvolume ${volume}, Skipping . . .$(tput sgr0)"
       continue
     fi
-    if [ -e "${btrfs_root}/snapshots/${volume}/${timestamp}" ]; then
+    if [ -e "${btrfs_root}/snapshots/${volume_dir}/${timestamp}" ]; then
       echo "$(tput setaf 1)There already exists a snapshot for this date of subvolume ${volume}, Skipping . . .$(tput sgr0)"
       continue
     fi
 
-    btrfs subvolume snapshot -r "${btrfs_root}/${volume}" "${btrfs_root}/snapshots/${volume}/${timestamp}"
+    btrfs subvolume snapshot -r "${btrfs_root}/${volume}" "${btrfs_root}/snapshots/${volume_dir}/${timestamp}"
     if [[ $? == 0 ]]; then
       echo "$(tput setaf 2)Created snapshot of ${volume}$(tput sgr0)"
     else
       echo "$(tput setaf 1)Failed to create snapshot of ${volume}!$(tput sgr0)"
     fi
-    echo "There are now $(ls -1 "${btrfs_root}/snapshots/${volume}" | wc -l) snapshots of ${volume}, the oldest is $(ls -1 "${btrfs_root}/snapshots/${volume}" | head -n 1)"
-    #TODO fix count for subvolumes with childs
   done
-
-  echo "Unmounting . . ."
-  umount $btrfs_root
 }
 
 
-timestamp=$(date +%y-%m-%d)
+timestamp=$(date +@%y-%m-%d)
 
 
-echo -e "Creating snapshots of foxlair-home . . .\n"
+echo -e "Creating snapshots of fieldfox . . .\n"
 
-btrfs_root="/mnt/subvolumes-home"
+btrfs_root="/mnt/subvolumes"
+
+echo "Mounting ${btrfs_root} . . ."
+if ! mount $btrfs_root; then
+  echo "$(tput setaf 1)Failed to mount ${btrfs_root}! Assuming already mounted . . .$(tput sgr0)"
+fi
 
 subvolumes="
-  documents
-  fzi
-  home
-  kamaro
-  media
-  studium
+  @arch-root
+  @arch-root/etc
+  @documents
+  @fzi
+  @home
+  @kamaro
+  @media
+  @studium
 "
 create_snapshots
 
-echo -e "Finished creating snapshots of foxlair-home \n\n"
+echo -e "Finished creating snapshots of fieldfox. \n\n"
 
-
-echo -e "Creating snapshots of foxlair-linux . . .\n"
-
-btrfs_root="/mnt/subvolumes-linux"
-
-subvolumes="
-  arch-root
-  arch-root/etc
-  arch-root/var/lib/machines
-"
-create_snapshots
-
-echo "Finished creating snapshots of foxlair-linux"
+tree -L 2 ${btrfs_root}/snapshots
