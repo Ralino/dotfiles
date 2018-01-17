@@ -20,10 +20,11 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'rdnetto/YCM-Generator'
 
 call vundle#end()
 filetype plugin indent on
@@ -183,6 +184,7 @@ let g:tex_flavor = "latex"
 
 " YouCompleteMe settings
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_python_binary_path = 'python'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_error_symbol = ''
@@ -207,11 +209,15 @@ endif
 
 " Syntastic settings
 let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_error_symbol = ''
 let g:syntastic_warning_symbol = ''
 let g:syntastic_style_error_symbol = ''
 let g:syntastic_style_warning_symbol = ''
+let g:syntastic_python_flake8_args = '--max-line-length=100'
+command SyntasticSuppressStyle :let g:syntastic_quiet_messages = { "type" : "style" }
+command SyntasticShowStyle :let g:syntastic_quiet_messages = {}
 
 " Airline settings
 set laststatus=2
