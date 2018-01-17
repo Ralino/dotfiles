@@ -1,6 +1,6 @@
 On host:
 # pacman -S debootstrap ubuntu-keyring xorg-xhost
-$ trizen -S gnupg1
+$ pacaur -S gnupg1
 # cd /var/lib/machines
 The name (here kamaro) cannot contain dashes!
 /*if on btrfs do:

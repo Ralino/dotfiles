@@ -1,6 +1,6 @@
 On host:
 # pacman -S debootstrap ubuntu-keyring xorg-xhost
-$ trizen -S gnupg1
+$ pacaur -S gnupg1
 # cd /var/lib/machines
 The name (here ros2) cannot contain dashes!
 /*if on btrfs do:
@@ -80,7 +80,7 @@ And login:
   | Follow the ros2 install guide: https://github.com/ros2/ros2/wiki/Linux-Development-Setup
   |
   | iBOSS specific:
-  | # apt install qt5-default libsqlite3-dev
+  | # apt install qt5-default libsqlite3-dev ccache
 
 Some tips:
 
