@@ -125,11 +125,11 @@ workspace 2  output primary
 workspace 3  output primary
 workspace 4  output primary
 workspace 5  output primary
-workspace 6  output primary
-workspace 7  output primary
-workspace 8  output primary
-workspace 9  output primary
-workspace 10 output primary
+workspace 6  output eDP1
+workspace 7  output eDP1
+workspace 8  output eDP1
+workspace 9  output eDP1
+workspace 10 output eDP1
 
 for_window [class="Steam"] floating enable, border normal
 for_window [class="Pinentry"] floating enable
@@ -270,7 +270,7 @@ bindsym $mod+b       exec firefox-nightly
 exec_always --no-startup-id $helper/init-system.sh
 exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
-exec_always --no-startup-id $helper/order-workspaces.py
+#exec_always --no-startup-id $helper/order-workspaces.py
 exec        --no-startup-id dunst
 exec        --no-startup-id devmon --exec-on-drive 'notify-send -u normal "Mounted new device" "%l\nDevice: %f"'\
                                    --exec-on-remove 'notify-send -u normal "Removed device" "%l"'
