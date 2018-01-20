@@ -1,0 +1,65 @@
+#!/bin/bash
+
+import_environment() {
+    (( pid )) && for var; do
+    IFS='=' read key val < <(egrep -z "$var" /proc/$pid/environ)
+
+    printf -v "$key" %s "$val"
+    [[ ${!key} ]] && export "$key"
+done
+}
+-t tty$(fgconsole)
+pid=$(pgrep xinit)
+pid=$(pgrep -P $pid -n)
+
+import_environment XAUTHORITY USER DISPLAY
+I3SOCK=$(i3 --get-socketpath)
+fontconfig_dir=/home/$USER/.config/fontconfig/fonts.conf
+
+
+rm -f $fontconfig_dir/10-sub-pixel-*
+
+case "$1" in
+  "normal")
+    xrandr --output LVDS1 --rotate normal
+    xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate none
+    xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate none
+    ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf $fontconfig_dir
+    ;;
+  "inverted")
+    xrandr --output LVDS1 --rotate inverted
+    xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate half
+    xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate half
+    ln -s /etc/fonts/conf.avail/10-sub-pixel-bgr.conf $fontconfig_dir
+    ;;
+  "right")
+    xrandr --output LVDS1 --rotate right
+    xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate cw
+    xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate cw
+    ln -s /etc/fonts/conf.avail/10-sub-pixel-vbgr.conf $fontconfig_dir
+    ;;
+  "left")
+    xrandr --output LVDS1 --rotate left
+    xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate ccw
+    xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate ccw
+    ln -s /etc/fonts/conf.avail/10-sub-pixel-vrgb.conf $fontconfig_dir
+    ;;
+  "toggle")
+    if [ "$(xrandr -q | grep 'inverted (normal')" ]; then
+      xrandr --output LVDS1 --rotate normal
+      xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate none
+      xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate none
+      ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf $fontconfig_dir
+    else
+      xrandr --output LVDS1 --rotate inverted
+      xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate half
+      xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate half
+      ln -s /etc/fonts/conf.avail/10-sub-pixel-bgr.conf $fontconfig_dir
+    fi
+    ;;
+  *)
+    echo 'Illegal argument: Should be one of "normal" "inverted" "right" "left" "toggle"'
+esac
+
+fc-cache
+i3-msg restart

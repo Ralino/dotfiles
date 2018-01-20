@@ -263,7 +263,7 @@ bindsym Print exec scrot ~/media/bilder/screenshots/%F_%H%M%S.png -e 'feh -. -A 
 bindsym Shift+Print exec scrot -u ~/media/bilder/screenshots/%F_%H%M%S.png -e 'feh -. -A "gimp %f" $f'
 
 #Rotate screen
-bindsym XF86RotateWindows exec $helper/rotate-screen.sh
+bindsym XF86RotateWindows exec --no-startup-id  rotate-screen toggle
 
 
 #Program shortcuts
