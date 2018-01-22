@@ -18,6 +18,7 @@ packages="
   ycm-conf.py          $HOME/.vim/.ycm_extra_conf.py
   compton.conf         $HOME/.config/compton.conf
   acpi                 /etc/acpi
+  pacman-hooks         /etc/pacman.d/hooks
 "
 
 install-package() {
