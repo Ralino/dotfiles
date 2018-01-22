@@ -1,7 +1,12 @@
 #!/bin/bash
 
 num=0
-files="$HOME/media/bilder/foxes_wallpaper/fav/*.png"
+if [ "$(xrandr -q | grep -E "^LVDS1" | grep "768x1366")" ]; then
+    files="$HOME/media/bilder/foxes_wallpaper/low_res/rotated/*.png"
+else
+    files="$HOME/media/bilder/foxes_wallpaper/low_res/*.png"
+fi
+
 
 if [ -z $1 ]; then
     requested=1
