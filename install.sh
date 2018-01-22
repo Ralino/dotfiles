@@ -19,6 +19,7 @@ packages="
   Xresources           $HOME/.Xresources
   ycm-conf.py          $HOME/.vim/.ycm_extra_conf.py
   compton.conf         $HOME/.config/compton.conf
+  pacman-hooks         /etc/pacman.d/hooks
 "
 
 install-package() {
