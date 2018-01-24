@@ -19,6 +19,7 @@ packages="
   compton.conf         $HOME/.config/compton.conf
   acpi                 /etc/acpi
   pacman-hooks         /etc/pacman.d/hooks
+  ranger               $HOME/.config/ranger
 "
 
 install-package() {
