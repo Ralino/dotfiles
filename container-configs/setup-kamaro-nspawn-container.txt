@@ -82,9 +82,27 @@ And login:
 
 Some tips:
 
-To get out of container press ^]^]^] (thats Strg+AltGr+9 on a german layout)
+- To get out of container press ^]^]^] (thats Strg+AltGr+9 on a german layout)
 
-/var/lib/machines is root only:
-# setfacl -m "user:<username>:rx" /var/lib/machines/
-This will be lost on reboot though, so creating a script might be useful
 
+- /var/lib/machines is root only:
+  # setfacl -m "user:<username>:rx" /var/lib/machines/
+  This will be lost on reboot though, so creating a script might be useful.
+
+
+- To use cameras or other usb devices, you need to allow the container to use
+  the device, and then bind the appropriate device node in:
+  To allow it, you need to add a line to your nspawn service file:
+  # systemctl edit systemd-nspawn@.service
+  [Service]
+  ExecStart=
+  ExecStart=/usr/bin/systemd-nspawn --quiet --keep-unit --boot --link-journal=try-guest --machine=%I
+  DeviceAllow=char-<devicetype> rwm  # <--new line
+
+  <devicetype> is the char device name you want to use, you can get it from /proc/devices.
+  For example, to use a camera, that line should be:
+  DeviceAllow=char-video4linux rwm
+
+  Then bind the device node(s) (e.g. /dev/video0) into your container. You can
+  do this while the container is already running:
+  # machinectl bind --mkdir kamaro <device-node>
