@@ -37,7 +37,6 @@ orange  = #fe8019
 
 width = 100%
 weight = 21
-bottom = true
 fixed-center = true
 
 background = ${colors.bg}
@@ -56,6 +55,7 @@ font-1 = Font Awesome:fontformat=truetype:size=7;2
 [bar/primary]
 monitor = ${env:MONITOR:HDMI1}
 monitor-fallback = ${env:MONITOR:LVDS1}
+bottom = true
 
 modules-left = gnome-pie i3
 modules-center = music date
@@ -68,17 +68,20 @@ inherit = bar/base
 
 [bar/secondary]
 monitor = ${env:MONITOR:LVDS1}
+bottom = true
 
-modules-left = i3
+modules-left = gnome-pie i3
 modules-center = music date
 
 inherit = bar/base
 
+
 [bar/clone]
 monitor = ${env:MONITOR:HDMI1}
 monitor-fallback = ${env:MONITOR:LVDS1}
+bottom = true
 
-modules-left = i3-clone
+modules-left = gnome-pie i3-clone
 modules-center = music date
 modules-right = volume memory cpu wlan eth battery
 
@@ -86,6 +89,28 @@ tray-position = right
 tray-padding = 3
 
 inherit = bar/base
+
+
+[bar/vtop]
+monitor = ${env:MONITOR:LVDS1}
+bottom = false
+
+tray-position = left
+tray-padding = 3
+modules-right = volume memory cpu wlan eth battery
+
+inherit = bar/base
+
+[bar/vbottom]
+monitor = ${env:MONITOR:LVDS1}
+bottom = true
+
+modules-left = gnome-pie i3
+modules-right = music date
+
+
+inherit = bar/base
+
 
 [module/i3]
 type = internal/i3
@@ -218,7 +243,7 @@ ramp-signal-foreground = ${self.format-disconnected-prefix-foreground}
 
 [module/eth]
 type = internal/network
-interface = enp4s0f2
+interface = enp0s25
 interval = 3.0
 
 format-connected-prefix = " "
