@@ -16,12 +16,18 @@ warn_nr=0
 trap revert SIGUSR1
 
 while [ ! ]; do
-    batstatus=$(acpi -b | head -n 1)
+    # acpi sometimes wrongly sees two batteries. Battery 1 is the correct one in that case
+    batstatus=$(acpi -b | grep "Battery 1:")
+    if [ -z "$batstatus" ]; then
+        batstatus=$(acpi -b | grep "Battery 0:")
+    fi
     remaining=$(echo "$batstatus" | grep -o " [[:digit:]]*%" | grep -o "[[:digit:]]*")
 
     if [ "$(echo "$batstatus" | grep "Discharging")" ]; then
         if (($remaining < 6 && $warn_nr < 3)); then
-            zenity --title="Ladekabel anschließen" --text="Nur noch $remaining% des Akkus verbleiben!\nLadekabel jetzt anschließen oder herunterfahren." --warning
+            zenity --title="Ladekabel anschließen" \
+                   --text="Nur noch $remaining% des Akkus verbleiben!\nLadekabel jetzt anschließen oder herunterfahren." \
+                   --warning
             warn_nr=3
         else
           if (($remaining < 21 && $warn_nr < 2)); then
