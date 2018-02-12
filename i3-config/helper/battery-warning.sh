@@ -16,12 +16,15 @@ warn_nr=0
 trap revert SIGUSR1
 
 while [ ! ]; do
-    # acpi sometimes wrongly sees two batteries. Battery 1 is the correct one in that case
-    batstatus=$(acpi -b | grep "Battery 1:")
-    if [ -z "$batstatus" ]; then
-        batstatus=$(acpi -b | grep "Battery 0:")
-    fi
-    remaining=$(echo "$batstatus" | grep -o " [[:digit:]]*%" | grep -o "[[:digit:]]*")
+    remaining=0
+    batstatus=$(acpi -b | grep "Battery")
+
+    IFS=$'\n'
+    for bat in $batstatus; do
+        current=$(echo "$bat" | grep -o " [[:digit:]]*%" | grep -o "[[:digit:]]*")
+        (( remaining = remaining + current ))
+    done
+    unset IFS
 
     if [ "$(echo "$batstatus" | grep "Discharging")" ]; then
         if (($remaining < 6 && $warn_nr < 3)); then
