@@ -16,8 +16,15 @@ warn_nr=0
 trap revert SIGUSR1
 
 while [ ! ]; do
-    batstatus=$(acpi -b | head -n 1)
-    remaining=$(echo "$batstatus" | grep -o " [[:digit:]]*%" | grep -o "[[:digit:]]*")
+    remaining=0
+    batstatus=$(acpi -b | grep "Battery")
+
+    IFS=$'\n'
+    for bat in $batstatus; do
+        current=$(echo "$bat" | grep -o " [[:digit:]]*%" | grep -o "[[:digit:]]*")
+        (( remaining = remaining + current ))
+    done
+    unset IFS
 
     if [ "$(echo "$batstatus" | grep "Discharging")" ]; then
         if (($remaining < 6 && $warn_nr < 3)); then
