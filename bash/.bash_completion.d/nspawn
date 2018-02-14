@@ -1,0 +1,33 @@
+_nspawn_opts()
+{
+  local curr_arg prev_arg options
+  curr_arg=${COMP_WORDS[COMP_CWORD]}
+  prev_arg=${COMP_WORDS[COMP_CWORD-1]}
+
+  if ! ls /var/lib/machines; then
+    COMPREPLY=( $(compgen -W "start stop login status" -- $curr_arg ) )
+    exit 0
+  fi
+
+  case "$prev_arg" in
+    "nspawn"|"con")
+      options=( "start stop login status $(ls -1 /var/lib/machines)" )
+      ;;
+    "start"|"stop"|"login"|"status")
+      options="$(ls -1 /var/lib/machines)"
+      ;;
+    *)
+      options=""
+      ;;
+  esac
+
+  COMPREPLY=( $(compgen -W "$options" -- $curr_arg ) )
+}
+
+_nspawn_no_output()
+{
+  _nspawn_opts > /dev/null
+}
+
+complete -F _nspawn_no_output nspawn
+complete -F _nspawn_no_output con
