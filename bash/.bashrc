@@ -23,6 +23,10 @@ shopt -s checkwinsize
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
+for file in $(ls -1 ~/.bash_completion.d/); do
+  source ~/.bash_completion.d/$file
+done
+
 orange_bg='\[$(tput setab 208)\]'
 orange_ft='\[$(tput setaf 208)\]'
 grey_bg='\[$(tput setab 246)\]'
@@ -50,6 +54,7 @@ alias alert='notify-send --urgency=normal "$([ $? = 0 ] && echo Finished || echo
 alias start='setsid'
 alias please='sudo $(history -p !-1)'
 alias gits='git status'
+alias chmox='chmod +x'
 alias nspawn='sudo nspawn'
 alias con='sudo nspawn'
 
