@@ -79,6 +79,11 @@ And login:
   | You might want to change the prompt as well to avoid confusion
   |
   | Install ROS Kinetic: http://wiki.ros.org/kinetic/Installation/Ubuntu
+  | # rosdep init
+  | $ rosdep update
+  | Some dependencies for Kamaro projects:
+  \ # apt install ros-kinetic-tf2-bullet ros-kinetic-geographic-msgs
+
 
 Some tips:
 
