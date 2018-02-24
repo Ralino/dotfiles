@@ -7,7 +7,8 @@ if ! $basedir/dual-head.sh; then
          --output HDMI1 --off \
          --output VGA1  --off
   sleep 0.5
-  feh --bg-scale $(basedir/pick-wallpaper.sh 1)
+  feh --bg-scale $($basedir/pick-wallpaper.sh 1)
+  $basedir/polybar.sh
   xsetwacom --set "Wacom ISDv4 90 Pen stylus" MapToOutput LVDS1
   xsetwacom --set "Wacom ISDv4 90 Pen eraser" MapToOutput LVDS1
   exit 1
