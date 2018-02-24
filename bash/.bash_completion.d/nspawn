@@ -6,7 +6,7 @@ _nspawn_opts()
 
   if ! ls /var/lib/machines; then
     COMPREPLY=( $(compgen -W "start stop login status" -- $curr_arg ) )
-    exit 0
+    return
   fi
 
   case "$prev_arg" in
