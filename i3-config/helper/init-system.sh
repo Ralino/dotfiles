@@ -8,6 +8,8 @@ echo "(Re)starting polybar(s) ..."
 $basedir/polybar.sh &
 echo "Stripping opacity values ..."
 $basedir/strip-opacity.py &
+killall compton
+compton -f -b
 #echo "Starting hotspot ..."
 #sudo /usr/local/bin/apstarter &
 echo "Calling battery-warning ..."

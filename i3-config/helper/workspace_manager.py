@@ -8,9 +8,11 @@ termite_map = [
     (".*\\(.*iboss_ws/src/iboss/.*\\) - VIM$", "iBOSS Vim"),
     (".* - VIM$", "Vim"),
     ("^.+?@nextcloud.*", "Nexcloud ssh"),
-    (".* - ROS2$", "ROS2 Terminal"),
+    ("^.+?@foxlair.*", "foxlair ssh"),
+    (".* - iBOSS$", "iBOSS Terminal"),
+    (".* - Ubuntu$", "Ubuntu Terminal"),
     (".* - Kamaro$", "Kamaro Terminal"),
-    ("^root@foxlair.*", "Root Terminal"),
+    ("^root@fieldfox.*", "Root Terminal"),
     ("^ranger:.*", "Ranger"),
     # default
     "Terminal"
@@ -36,7 +38,7 @@ class_map = {
     "gnome-pie-552": "",
     "gnome-pie-575": "",
     "gnome-pie-856": "",
-    "Pavucontrol": ""
+    "gnome-pie-471": ""
 }
 
 

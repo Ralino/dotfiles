@@ -22,16 +22,16 @@ if (( $bldual < 1 )) || (( $bldual > 100 )); then
     echo "$bldual" >> $basedir/.backlight
 fi
 
-if $basedir/dual-head.sh; then
-    xrandr --output $external_screen --auto --primary --right-of LVDS1
-    xbacklight -set $bldual
-    feh --bg-scale $($basedir/pick-wallpaper.sh 2)
-
-    #workaround to stop i3 from crashing
-    sleep 0.5
-    xdotool mousemove_relative 1 0
+if [ "$(xrandr -q | grep -E "^LVDS1.*inverted (normal")" ]; then
+  $basedir/toggle-clone.sh clone
 else
-    xrandr --output LVDS1 --auto --primary --output HDMI1 --off --output VGA1 --off
-    xbacklight -set $blsingle
-    feh --bg-scale $($basedir/pick-wallpaper.sh 1)
+  $basedir/toggle-clone.sh extend
+fi
+if $basedir/dual-head.sh; then
+  xbacklight -set $bldual
+  #workaround to stop i3 from crashing
+  sleep 0.5
+  xdotool mousemove_relative 1 0
+else
+  xbacklight -set $blsingle
 fi

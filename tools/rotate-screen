@@ -8,7 +8,7 @@ import_environment() {
     [[ ${!key} ]] && export "$key"
 done
 }
--t tty$(fgconsole)
+
 pid=$(pgrep xinit)
 pid=$(pgrep -P $pid -n)
 
@@ -45,16 +45,16 @@ case "$1" in
     ln -s /etc/fonts/conf.avail/10-sub-pixel-vrgb.conf $fontconfig_dir
     ;;
   "toggle")
-    if [ "$(xrandr -q | grep 'inverted (normal')" ]; then
-      xrandr --output LVDS1 --rotate normal
-      xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate none
-      xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate none
-      ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf $fontconfig_dir
-    else
+    if ! [ "$(xrandr -q | grep 'inverted (normal')" ]; then
       xrandr --output LVDS1 --rotate inverted
       xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate half
       xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate half
       ln -s /etc/fonts/conf.avail/10-sub-pixel-bgr.conf $fontconfig_dir
+    else
+      xrandr --output LVDS1 --rotate normal
+      xsetwacom set "Wacom ISDv4 90 Pen stylus" Rotate none
+      xsetwacom set "Wacom ISDv4 90 Pen eraser" Rotate none
+      ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf $fontconfig_dir
     fi
     ;;
   *)

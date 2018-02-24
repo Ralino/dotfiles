@@ -1,10 +1,16 @@
 #!/bin/bash
+basedir=$(dirname "$0")
 
 num=0
-if [ "$(xrandr -q | grep -E "^LVDS1" | grep "768x1366")" ]; then
-    files="$HOME/media/bilder/foxes_wallpaper/low_res/rotated/*.png"
+if $basedir/dual-head.sh; then
+  # Assume hd
+  files="$HOME/media/bilder/foxes_wallpaper/fav/*.png"
 else
-    files="$HOME/media/bilder/foxes_wallpaper/low_res/*.png"
+    if [ "$(xrandr -q | grep -E "^LVDS1" | grep "768x1366")" ]; then
+        files="$HOME/media/bilder/foxes_wallpaper/low_res/rotated/*.png"
+  else
+      files="$HOME/media/bilder/foxes_wallpaper/low_res/*.png"
+  fi
 fi
 
 

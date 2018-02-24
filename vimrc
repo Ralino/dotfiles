@@ -218,6 +218,7 @@ let g:syntastic_style_warning_symbol = ''
 let g:syntastic_python_flake8_args = '--max-line-length=100'
 command SyntasticSuppressStyle :let g:syntastic_quiet_messages = { "type" : "style" }
 command SyntasticShowStyle :let g:syntastic_quiet_messages = {}
+" show loclist: :lopen
 
 " Airline settings
 set laststatus=2

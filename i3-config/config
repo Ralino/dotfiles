@@ -16,12 +16,14 @@ set $external_screen HDMI1
 font pango:Fira Sans 8
 
 hide_edge_borders vertical
+focus_follows_mouse no
 
 #Path to helper scripts
 set $helper ~/.config/i3/helper
 
 # kill focused window
 bindsym $mod+q kill
+bindsym --release button3 kill
 
 #Scratchpad
 bindsym $mod+c exec --no-startup-id $helper/open_scratchpad.py
@@ -80,8 +82,9 @@ bindsym $mod+space focus mode_toggle
 floating_modifier $mod
 
 # Multiscreen
-bindsym $mod+p exec --no-startup-id $helper/toggle-clone.sh
-bindsym $mod+i move workspace to output right
+bindsym $mod+p       exec --no-startup-id $helper/toggle-clone.sh
+bindsym $mod+Shift+p exec --no-startup-id $helper/toggle-clone.sh external-only
+bindsym $mod+o move workspace to output right
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
@@ -123,17 +126,17 @@ bindsym $mod+Control+9 move container to workspace number 9
 bindsym $mod+Control+0 move container to workspace number 10
 
 # Assign workspaces to screens
-#workspace  1 output $external_screen
-#workspace  2 output $external_screen
-#workspace  3 output $external_screen
-#workspace  4 output $external_screen
-#workspace  5 output $external_screen
-#
-#workspace  6  output LVDS1
-#workspace  7  output LVDS1
-#workspace  8  output LVDS1
-#workspace  9  output LVDS1
-#workspace  10 output LVDS1
+workspace  1 output $external_screen
+workspace  2 output $external_screen
+workspace  3 output $external_screen
+workspace  4 output $external_screen
+workspace  5 output $external_screen
+
+workspace  6  output LVDS1
+workspace  7  output LVDS1
+workspace  8  output LVDS1
+workspace  9  output LVDS1
+workspace  10 output LVDS1
 
 #workspace $presentation output VGA1 #FIXME
 
@@ -246,9 +249,9 @@ bindsym XF86MonBrightnessDown exec --no-startup-id $helper/dimbacklight.sh -5
 
 #Audio control
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
-
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2
 bindsym XF86AudioMute        exec --no-startup-id pamixer -t
+bindsym XF86AudioMicMute     exec --no-startup-id pamixer --default-source -t
 
 #Musicplayer control
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -280,32 +283,14 @@ bindsym $mod+Shift+Return exec i3-sensible-terminal
 bindsym XF86HomePage exec firefox
 bindsym $mod+b       exec firefox
 
-#Status bar
-bindsym $mod+o mode "Status bar"
-mode "Status bar" {
-    #Volume
-    bindsym v exec --no-startup-id $helper/volume-control.sh, mode "default"
-    bindsym p exec --no-startup-id $helper/volume-control.sh, mode "default"
-
-    #Calendar
-    bindsym d exec --no-startup-id ~/documents/github/gsimplecal/src/gsimplecal, mode "default"
-    bindsym c exec --no-startup-id ~/documents/github/gsimplecal/src/gsimplecal, mode "default"
-
-    bindsym Escape mode "default"
-    bindsym $mod+o mode "default"
-}
-
-
 #STARTUP
 
 exec_always --no-startup-id $helper/init-system.sh
-#exec_always --no-startup-id synclient TapButton1=1
 exec_always --no-startup-id $helper/workspace_manager.py
 exec        --no-startup-id dunst
 exec        --no-startup-id devmon --exec-on-drive 'notify-send -u normal "Mounted new device" "%l\nDevice: %f"'\
                                    --exec-on-remove 'notify-send -u normal "Removed device" "%l"'
 exec        --no-startup-id xflux -l 49.0 -g 8.4
-exec        --no-startup-id compton -f
 exec        --no-startup-id xset dpms 0 0 0
 exec        --no-startup-id xset s off
 exec        --no-startup-id nm-applet
@@ -314,8 +299,7 @@ exec        --no-startup-id easystroke
 #TODO install correctly (create patch to not make it a dock)
 exec        --no-startup-id ~/documents/github/Gnome-Pie/gnome-pie
 
-#FIXME does not work in xorg-conf
 exec        --no-startup-id xsetwacom --set "Wacom ISDv4 90 Pen stylus" Threshold 15
 exec        --no-startup-id xsetwacom --set "Wacom ISDv4 90 Pen eraser" Threshold 15
 
-focus_follows_mouse no
+exec        --no-startup-id xrandr --output HDMI1 --set "Broadcast RGB" "Full"
